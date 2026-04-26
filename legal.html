@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pactly — Juridische documenten</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:#0D0D1C;color:#fff;line-height:1.7;-webkit-text-size-adjust:100%}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#0D0D1C;border-bottom:1px solid rgba(255,255,255,0.08);height:60px;display:flex;align-items:center;padding:0 1.5rem;gap:1.5rem}
+.nav-logo{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;background:linear-gradient(135deg,#5B3FE8,#E8357A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;text-decoration:none}
+.nav-back{font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:#fff}
+
+/* DOC NAV */
+.doc-nav{background:#161628;border-bottom:1px solid rgba(255,255,255,0.08);padding:0 1.5rem;position:sticky;top:60px;z-index:90;overflow-x:auto}
+.doc-nav-inner{display:flex;gap:0;max-width:860px;margin:0 auto}
+.doc-tab{padding:14px 20px;font-size:13px;font-weight:500;color:rgba(255,255,255,0.55);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
+.doc-tab.active,.doc-tab:hover{color:#fff;border-bottom-color:#5B3FE8}
+
+/* MAIN */
+main{max-width:860px;margin:0 auto;padding:80px 1.5rem 80px}
+@media(min-width:768px){main{padding:80px 2.5rem 80px}}
+
+/* DOC SECTION */
+.doc-section{display:none;padding-top:2rem}
+.doc-section.active{display:block}
+
+/* HEADER */
+.doc-header{margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+.doc-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:10px}
+.doc-title{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:-1px;line-height:1.05;margin-bottom:.875rem}
+.doc-meta{display:flex;flex-wrap:wrap;gap:.5rem 2rem;margin-top:1rem}
+.doc-meta-item{font-size:13px;color:rgba(255,255,255,0.6)}
+.doc-meta-item strong{color:rgba(255,255,255,0.85);font-weight:600}
+
+/* CONTENT */
+.doc-content h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#fff;margin:2.5rem 0 .875rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.06)}
+.doc-content h2:first-child{margin-top:0;border-top:none}
+.doc-content h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:rgba(255,255,255,0.9);margin:1.5rem 0 .5rem}
+.doc-content p{font-size:15px;color:rgba(255,255,255,0.78);line-height:1.8;margin-bottom:.875rem}
+.doc-content ul,.doc-content ol{padding-left:1.5rem;margin-bottom:.875rem}
+.doc-content li{font-size:15px;color:rgba(255,255,255,0.78);line-height:1.8;margin-bottom:.25rem}
+.doc-content a{color:#a89cf7;text-decoration:none}
+.doc-content a:hover{text-decoration:underline}
+.doc-content strong{color:rgba(255,255,255,0.9);font-weight:600}
+.doc-content table{width:100%;border-collapse:collapse;margin:1rem 0 1.25rem;font-size:14px}
+.doc-content th{text-align:left;padding:10px 14px;background:#1F1F38;color:rgba(255,255,255,0.85);font-weight:600;font-size:12px;font-family:'Space Mono',monospace;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.1)}
+.doc-content td{padding:10px 14px;color:rgba(255,255,255,0.75);border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:top}
+.doc-content tr:last-child td{border-bottom:none}
+
+/* DISCLAIMER */
+.disclaimer{background:rgba(91,63,232,0.12);border:1px solid rgba(91,63,232,0.3);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:2.5rem}
+.disclaimer p{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.65;margin:0}
+.disclaimer strong{color:#a89cf7}
+
+/* ACTIONS */
+.doc-actions{display:flex;gap:10px;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap}
+.btn-grad{padding:11px 22px;border-radius:100px;background:linear-gradient(135deg,#5B3FE8,#E8357A);border:none;color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .2s}
+.btn-grad:hover{opacity:.88}
+.btn-ghost{padding:11px 22px;border-radius:100px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.75);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color .2s,color .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);color:#fff}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">Pactly</a>
+  <a class="nav-back" href="/">← Terug naar pactly.nl</a>
+</nav>
+
+<div class="doc-nav">
+  <div class="doc-nav-inner">
+    <div class="doc-tab active" onclick="showDoc('av')">Algemene voorwaarden</div>
+    <div class="doc-tab" onclick="showDoc('privacy')">Privacyverklaring</div>
+    <div class="doc-tab" onclick="showDoc('cookie')">Cookieverklaring</div>
+  </div>
+</div>
+
+<main>
+
+<!-- ── ALGEMENE VOORWAARDEN ── -->
+<div class="doc-section active" id="doc-av">
+  <div class="doc-header">
+    <div class="doc-label">Document 01</div>
+    <h1 class="doc-title">Algemene Voorwaarden</h1>
+    <div class="doc-meta">
+      <div class="doc-meta-item"><strong>Platform:</strong> Pactly (pactly.nl)</div>
+      <div class="doc-meta-item"><strong>Exploitant:</strong> Toms Ambitie</div>
+      <div class="doc-meta-item"><strong>KVK:</strong> 70590907</div>
+      <div class="doc-meta-item"><strong>Versie:</strong> 1.0 — april 2026</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <p><strong>Let op:</strong> Dit document is opgesteld als werkdocument. Laat het vóór publicatie controleren door een jurist of via een service als LegalDNA of Jurifast. Kosten: circa €150–300.</p>
+  </div>
+
+  <div class="doc-content">
+
+    <h2>Artikel 1 — Definities</h2>
+    <p>In deze Algemene Voorwaarden wordt verstaan onder:</p>
+    <ul>
+      <li><strong>Pactly:</strong> het online platform bereikbaar via pactly.nl, een handelsnaam van Toms Ambitie.</li>
+      <li><strong>Toms Ambitie:</strong> de eenmanszaak gevestigd te Cleyndertstraat 16, 8044PP Zwolle, Nederland, KVK-nummer 70590907, handelend onder de naam Pactly.</li>
+      <li><strong>Gebruiker:</strong> iedere natuurlijke persoon die zich registreert voor en/of gebruik maakt van het platform Pactly.</li>
+      <li><strong>Account:</strong> de persoonlijke omgeving die de Gebruiker aanmaakt op Pactly.</li>
+      <li><strong>Dienst:</strong> het geheel van functionaliteiten dat Pactly aanbiedt, waaronder het opslaan, beheren en bewaken van contracten, abonnementen en overeenkomsten.</li>
+      <li><strong>Content:</strong> alle gegevens, documenten en informatie die de Gebruiker invoert in het platform.</li>
+      <li><strong>Overeenkomst:</strong> de overeenkomst tussen Toms Ambitie en Gebruiker op basis van deze Algemene Voorwaarden.</li>
+    </ul>
+
+    <h2>Artikel 2 — Toepasselijkheid</h2>
+    <p>2.1 Deze Algemene Voorwaarden zijn van toepassing op alle overeenkomsten die via pactly.nl tot stand komen tussen Toms Ambitie en Gebruiker.</p>
+    <p>2.2 Door gebruik te maken van het platform en/of het aanmaken van een Account, aanvaardt de Gebruiker deze Algemene Voorwaarden.</p>
+    <p>2.3 Toms Ambitie behoudt het recht deze voorwaarden te wijzigen. Wijzigingen worden minimaal 30 dagen van tevoren per e-mail aangekondigd. Voortgezet gebruik na de wijzigingsdatum geldt als aanvaarding van de nieuwe voorwaarden.</p>
+    <p>2.4 Eventuele afwijkende voorwaarden van de Gebruiker zijn niet van toepassing, tenzij schriftelijk anders is overeengekomen.</p>
+
+    <h2>Artikel 3 — Totstandkoming van de Overeenkomst</h2>
+    <p>3.1 De Overeenkomst komt tot stand op het moment dat de Gebruiker zich heeft geregistreerd op pactly.nl en zijn registratie heeft bevestigd.</p>
+    <p>3.2 Voor minderjarigen onder de 16 jaar is toestemming van een ouder of wettelijk vertegenwoordiger vereist.</p>
+    <p>3.3 Toms Ambitie behoudt het recht om een registratie zonder opgave van redenen te weigeren of te annuleren.</p>
+
+    <h2>Artikel 4 — De Dienst</h2>
+    <p>4.1 Pactly biedt Gebruikers een platform waarmee zij hun contracten, abonnementen en overeenkomsten kunnen opslaan, beheren, bewaken en inzien.</p>
+    <p>4.2 Het platform biedt twee abonnementsvormen:</p>
+    <ul>
+      <li><strong>Gratis (Free):</strong> basisgebruik tot 10 contracten, inclusief basisreminders en dashboardoverzicht.</li>
+      <li><strong>Pactly Plus:</strong> uitgebreid gebruik voor €4,99 per maand of €39 per jaar, inclusief onbeperkt contracten, huishouddeling, document-opslag, meerjarige tijdlijn en aanvullende functies.</li>
+    </ul>
+    <p>4.3 Pactly streeft ernaar de dienst 24/7 beschikbaar te houden, maar kan geen ononderbroken beschikbaarheid garanderen. Gepland onderhoud wordt indien mogelijk vooraf aangekondigd.</p>
+    <p>4.4 Pactly behoudt het recht de dienst, functionaliteiten of prijzen aan te passen. Wijzigingen in het betaalde abonnement worden minimaal 30 dagen van tevoren aangekondigd.</p>
+    <p>4.5 Het platform biedt mogelijk verwijzingen naar derde partijen (zoals energieleveranciers of verzekeraars). Pactly is geen partij bij overeenkomsten tussen de Gebruiker en deze derden en aanvaardt hiervoor geen aansprakelijkheid.</p>
+
+    <h2>Artikel 5 — Verplichtingen van de Gebruiker</h2>
+    <p>5.1 De Gebruiker is verantwoordelijk voor de juistheid en volledigheid van de gegevens die hij invoert in het platform.</p>
+    <p>5.2 De Gebruiker mag het platform uitsluitend gebruiken voor persoonlijk, niet-commercieel gebruik, tenzij schriftelijk anders is overeengekomen.</p>
+    <p>5.3 Het is de Gebruiker verboden om:</p>
+    <ul>
+      <li>de dienst te gebruiken voor onrechtmatige doeleinden;</li>
+      <li>gegevens van andere gebruikers te benaderen of te kopiëren;</li>
+      <li>de technische beveiliging van het platform te omzeilen of te beschadigen;</li>
+      <li>het platform te gebruiken op een wijze die de beschikbaarheid voor anderen belemmert.</li>
+    </ul>
+    <p>5.4 De Gebruiker is verantwoordelijk voor de vertrouwelijkheid van zijn inloggegevens en dient misbruik direct te melden via hallo@pactly.nl.</p>
+
+    <h2>Artikel 6 — Betaling en abonnement (Pactly Plus)</h2>
+    <p>6.1 Betaling voor Pactly Plus geschiedt via de aangeboden betaalmethoden op pactly.nl.</p>
+    <p>6.2 Het Pactly Plus-abonnement wordt automatisch verlengd, tenzij de Gebruiker het abonnement voor de verlengingsdatum opzegt via de accountinstellingen.</p>
+    <p>6.3 Restitutie van betaalde abonnementsgelden is niet mogelijk, tenzij de wet dit verplicht.</p>
+    <p>6.4 Bij niet-tijdige betaling kan Toms Ambitie de toegang tot Pactly Plus tijdelijk opschorten totdat de betaling is voldaan.</p>
+    <p>6.5 Alle prijzen zijn inclusief BTW, tenzij anders vermeld.</p>
+
+    <h2>Artikel 7 — Herroepingsrecht</h2>
+    <p>7.1 De Gebruiker heeft het recht de Overeenkomst zonder opgave van redenen te ontbinden binnen 14 dagen na het sluiten ervan (herroepingstermijn), conform artikel 6:230o BW.</p>
+    <p>7.2 Indien de Gebruiker heeft verzocht om de dienstverlening tijdens de herroepingstermijn te starten, is de Gebruiker een evenredig deel van het verschuldigde bedrag verschuldigd voor de reeds geleverde dienst.</p>
+    <p>7.3 Herroeping dient schriftelijk te worden gemeld via hallo@pactly.nl.</p>
+
+    <h2>Artikel 8 — Intellectueel Eigendom</h2>
+    <p>8.1 Alle rechten van intellectueel eigendom op het platform, de software, het ontwerp, de teksten en de merkidentiteit van Pactly berusten bij Toms Ambitie.</p>
+    <p>8.2 De Gebruiker verkrijgt uitsluitend een beperkt, persoonlijk, niet-overdraagbaar gebruiksrecht voor de duur van de Overeenkomst.</p>
+    <p>8.3 De Gebruiker behoudt alle rechten op de Content die hij invoert. Door Content in te voeren verleent de Gebruiker Toms Ambitie een beperkte licentie om deze Content te verwerken ten behoeve van de dienstverlening.</p>
+
+    <h2>Artikel 9 — Aansprakelijkheid</h2>
+    <p>9.1 Toms Ambitie is niet aansprakelijk voor schade die voortvloeit uit:</p>
+    <ul>
+      <li>onjuiste of onvolledige informatie ingevoerd door de Gebruiker;</li>
+      <li>gemiste opzegtermijnen of contractuele verplichtingen van de Gebruiker;</li>
+      <li>tijdelijke onbeschikbaarheid van het platform;</li>
+      <li>handelingen van derde partijen waarnaar het platform verwijst.</li>
+    </ul>
+    <p>9.2 De aansprakelijkheid van Toms Ambitie is in alle gevallen beperkt tot het bedrag dat de Gebruiker in de twaalf maanden voorafgaand aan de schadegebeurtenis heeft betaald voor de dienst. Bij gratis gebruik is de aansprakelijkheid nihil.</p>
+    <p>9.3 Toms Ambitie is nooit aansprakelijk voor indirecte schade, gevolgschade of gederfde winst.</p>
+    <p>9.4 De in dit artikel opgenomen beperkingen gelden niet indien de schade het gevolg is van opzet of bewuste roekeloosheid van Toms Ambitie.</p>
+
+    <h2>Artikel 10 — Opzegging en beëindiging</h2>
+    <p>10.1 De Gebruiker kan zijn Account op elk moment verwijderen via de accountinstellingen.</p>
+    <p>10.2 Toms Ambitie kan de Overeenkomst per direct beëindigen indien de Gebruiker de Algemene Voorwaarden schendt, met name de bepalingen in artikel 5.</p>
+    <p>10.3 Na beëindiging van het Account worden de gegevens van de Gebruiker verwijderd conform de Privacyverklaring.</p>
+
+    <h2>Artikel 11 — Toepasselijk recht en geschillen</h2>
+    <p>11.1 Op deze Overeenkomst is uitsluitend Nederlands recht van toepassing.</p>
+    <p>11.2 Geschillen worden bij voorkeur in overleg opgelost. Indien dit niet lukt, worden geschillen voorgelegd aan de bevoegde rechter in het arrondissement Overijssel, locatie Zwolle, tenzij de wet anders bepaalt.</p>
+    <p>11.3 De Gebruiker die handelt als consument kan ook een geschil voorleggen aan de Geschillencommissie via www.degeschillencommissie.nl of de Online Dispute Resolution (ODR) via ec.europa.eu/odr.</p>
+
+    <h2>Artikel 12 — Contactgegevens</h2>
+    <p>Toms Ambitie<br>
+    Handelend onder de naam: Pactly<br>
+    Cleyndertstraat 16, 8044 PP Zwolle<br>
+    KVK-nummer: 70590907<br>
+    BTW-identificatienummer: NL002010180B20<br>
+    E-mail: hallo@pactly.nl<br>
+    Website: www.pactly.nl</p>
+
+  </div>
+
+  <div class="doc-actions">
+    <button class="btn-grad" onclick="window.print()">Afdrukken / Opslaan als PDF</button>
+    <button class="btn-ghost" onclick="showDoc('privacy')">Volgende: Privacyverklaring →</button>
+  </div>
+</div>
+
+<!-- ── PRIVACYVERKLARING ── -->
+<div class="doc-section" id="doc-privacy">
+  <div class="doc-header">
+    <div class="doc-label">Document 02</div>
+    <h1 class="doc-title">Privacyverklaring</h1>
+    <div class="doc-meta">
+      <div class="doc-meta-item"><strong>Platform:</strong> Pactly (pactly.nl)</div>
+      <div class="doc-meta-item"><strong>Exploitant:</strong> Toms Ambitie</div>
+      <div class="doc-meta-item"><strong>KVK:</strong> 70590907</div>
+      <div class="doc-meta-item"><strong>Versie:</strong> 1.0 — april 2026</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <p><strong>Let op:</strong> Dit document is opgesteld als werkdocument. Laat het vóór publicatie controleren door een jurist. Zorg tevens voor registratie als verwerkingsverantwoordelijke bij de Autoriteit Persoonsgegevens indien van toepassing.</p>
+  </div>
+
+  <div class="doc-content">
+
+    <h2>1. Wie zijn wij?</h2>
+    <p>Pactly is een handelsnaam van Toms Ambitie, gevestigd te Cleyndertstraat 16, 8044 PP Zwolle, KVK 70590907. Wij zijn verantwoordelijk voor de verwerking van persoonsgegevens via het platform pactly.nl.</p>
+    <p>Vragen over privacy? Neem contact op via hallo@pactly.nl.</p>
+
+    <h2>2. Welke gegevens verwerken wij?</h2>
+    <p>Wij verwerken de volgende categorieën persoonsgegevens:</p>
+
+    <h3>Accountgegevens</h3>
+    <ul>
+      <li>Naam</li>
+      <li>E-mailadres</li>
+      <li>Wachtwoord (versleuteld opgeslagen)</li>
+      <li>Huishoudnaam en -leden (optioneel)</li>
+    </ul>
+
+    <h3>Contractgegevens (door u ingevoerd)</h3>
+    <ul>
+      <li>Naam en categorie van contracten en abonnementen</li>
+      <li>Looptijden, opzegtermijnen en einddatums</li>
+      <li>Maandlasten en aanbieders</li>
+      <li>Geüploade documenten (bij Pactly Plus)</li>
+      <li>Notities bij contracten</li>
+    </ul>
+
+    <h3>Technische gegevens</h3>
+    <ul>
+      <li>IP-adres</li>
+      <li>Browsertype en -versie</li>
+      <li>Apparaattype en besturingssysteem</li>
+      <li>Tijdstempels van gebruik</li>
+    </ul>
+
+    <h3>Betalingsgegevens (bij Pactly Plus)</h3>
+    <ul>
+      <li>Betalingsstatus (geen volledige betalingsgegevens — verwerking via externe betaalprovider)</li>
+      <li>Facturatiehistorie</li>
+    </ul>
+
+    <h3>Waitlist-gegevens</h3>
+    <ul>
+      <li>E-mailadres (bij aanmelding voor de wachtlijst)</li>
+    </ul>
+
+    <h2>3. Waarom verwerken wij uw gegevens?</h2>
+
+    <table>
+      <thead>
+        <tr><th>Doel</th><th>Grondslag (AVG)</th><th>Bewaartermijn</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Account aanmaken en beheren</td><td>Uitvoering overeenkomst</td><td>Tot verwijdering account</td></tr>
+        <tr><td>Levering van de dienst</td><td>Uitvoering overeenkomst</td><td>Tot verwijdering account</td></tr>
+        <tr><td>Reminders en notificaties sturen</td><td>Uitvoering overeenkomst</td><td>Tot verwijdering account</td></tr>
+        <tr><td>Verwerking betaling Pactly Plus</td><td>Uitvoering overeenkomst</td><td>7 jaar (belastingwetgeving)</td></tr>
+        <tr><td>Klantenservice</td><td>Gerechtvaardigd belang</td><td>2 jaar na laatste contact</td></tr>
+        <tr><td>Verbetering van de dienst</td><td>Gerechtvaardigd belang</td><td>Geanonimiseerd</td></tr>
+        <tr><td>Waitlist-communicatie</td><td>Toestemming</td><td>Tot uitschrijving</td></tr>
+        <tr><td>Marketing-e-mails (nieuwsbrief)</td><td>Toestemming</td><td>Tot uitschrijving</td></tr>
+      </tbody>
+    </table>
+
+    <h2>4. Delen wij uw gegevens?</h2>
+    <p>Wij verkopen uw persoonsgegevens nooit aan derden. Wij delen gegevens uitsluitend in de volgende gevallen:</p>
+    <ul>
+      <li><strong>Verwerkers:</strong> dienstverleners die namens ons persoonsgegevens verwerken (hosting, e-mailservice, betaalprovider). Met deze partijen hebben wij verwerkersovereenkomsten gesloten.</li>
+      <li><strong>Affiliate-partners:</strong> indien u via Pactly doorklikt naar een derde partij (energieleverancier, verzekeraar, telecomaanbieder), deelt Pactly uitsluitend de gegevens die noodzakelijk zijn voor de verwijzing. Uw contractgegevens worden niet gedeeld.</li>
+      <li><strong>Wettelijke verplichtingen:</strong> indien wij hiertoe wettelijk verplicht zijn, bijvoorbeeld op basis van een rechterlijk bevel.</li>
+    </ul>
+
+    <h2>5. Internationale doorgifte</h2>
+    <p>Wij streven ernaar uw gegevens binnen de Europese Economische Ruimte (EER) te verwerken. Indien gebruik wordt gemaakt van diensten buiten de EER, zorgen wij voor passende waarborgen conform hoofdstuk V AVG (zoals standaard contractbepalingen).</p>
+
+    <h2>6. Beveiliging</h2>
+    <p>Wij nemen passende technische en organisatorische maatregelen ter beveiliging van uw persoonsgegevens, waaronder:</p>
+    <ul>
+      <li>Versleutelde verbinding (HTTPS/TLS)</li>
+      <li>Versleutelde opslag van wachtwoorden</li>
+      <li>Toegangsbeperking tot persoonsgegevens</li>
+      <li>Regelmatige beveiligingscontroles</li>
+    </ul>
+
+    <h2>7. Uw rechten</h2>
+    <p>Op grond van de AVG heeft u de volgende rechten:</p>
+    <ul>
+      <li><strong>Inzagerecht:</strong> u kunt opvragen welke gegevens wij van u verwerken.</li>
+      <li><strong>Rectificatierecht:</strong> u kunt onjuiste gegevens laten corrigeren.</li>
+      <li><strong>Recht op verwijdering:</strong> u kunt verzoeken uw gegevens te verwijderen ("recht op vergetelheid").</li>
+      <li><strong>Recht op beperking:</strong> u kunt de verwerking laten beperken in bepaalde situaties.</li>
+      <li><strong>Recht op dataportabiliteit:</strong> u kunt uw gegevens in een gangbaar formaat opvragen.</li>
+      <li><strong>Recht van bezwaar:</strong> u kunt bezwaar maken tegen verwerking op basis van gerechtvaardigd belang.</li>
+      <li><strong>Recht om toestemming in te trekken:</strong> u kunt eerder gegeven toestemming altijd intrekken.</li>
+    </ul>
+    <p>U kunt uw rechten uitoefenen via hallo@pactly.nl. Wij reageren binnen 30 dagen.</p>
+    <p>U heeft tevens het recht een klacht in te dienen bij de Autoriteit Persoonsgegevens via autoriteitpersoonsgegevens.nl.</p>
+
+    <h2>8. Kinderen</h2>
+    <p>Onze dienst is niet gericht op kinderen onder de 16 jaar. Wij verwerken niet bewust persoonsgegevens van personen onder de 16 jaar zonder toestemming van een ouder of wettelijk vertegenwoordiger. Indien u vermoedt dat wij dergelijke gegevens hebben ontvangen, kunt u contact opnemen via hallo@pactly.nl.</p>
+
+    <h2>9. Wijzigingen in deze verklaring</h2>
+    <p>Wij kunnen deze Privacyverklaring periodiek aanpassen. De meest actuele versie is altijd beschikbaar op pactly.nl/privacy. Wezenlijke wijzigingen communiceren wij per e-mail aan onze gebruikers.</p>
+
+    <h2>10. Contactgegevens</h2>
+    <p>Toms Ambitie<br>
+    Handelend onder de naam: Pactly<br>
+    Cleyndertstraat 16, 8044 PP Zwolle<br>
+    KVK-nummer: 70590907<br>
+    BTW-identificatienummer: NL002010180B20<br>
+    E-mail: hallo@pactly.nl</p>
+
+  </div>
+
+  <div class="doc-actions">
+    <button class="btn-grad" onclick="window.print()">Afdrukken / Opslaan als PDF</button>
+    <button class="btn-ghost" onclick="showDoc('cookie')">Volgende: Cookieverklaring →</button>
+  </div>
+</div>
+
+<!-- ── COOKIEVERKLARING ── -->
+<div class="doc-section" id="doc-cookie">
+  <div class="doc-header">
+    <div class="doc-label">Document 03</div>
+    <h1 class="doc-title">Cookieverklaring</h1>
+    <div class="doc-meta">
+      <div class="doc-meta-item"><strong>Platform:</strong> Pactly (pactly.nl)</div>
+      <div class="doc-meta-item"><strong>Exploitant:</strong> Toms Ambitie</div>
+      <div class="doc-meta-item"><strong>KVK:</strong> 70590907</div>
+      <div class="doc-meta-item"><strong>Versie:</strong> 1.0 — april 2026</div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <p><strong>Technische actie vereist:</strong> Zorg vóór go-live voor een werkende cookie-consentbanner op pactly.nl. Analytische en marketingcookies mogen pas worden geplaatst na expliciete toestemming van de bezoeker. Tools: <strong>Cookiebot</strong> (implementeer via cookiebot.com).</p>
+  </div>
+
+  <div class="doc-content">
+
+    <h2>1. Wat zijn cookies?</h2>
+    <p>Cookies zijn kleine tekstbestanden die bij het bezoeken van een website op uw apparaat worden opgeslagen. Pactly maakt gebruik van cookies en vergelijkbare technologieën om de website en het platform goed te laten functioneren en om de gebruikerservaring te verbeteren.</p>
+
+    <h2>2. Welke cookies gebruiken wij?</h2>
+
+    <h3>Functionele cookies (altijd actief)</h3>
+    <p>Deze cookies zijn noodzakelijk voor het functioneren van het platform. Ze vereisen geen toestemming.</p>
+    <table>
+      <thead><tr><th>Naam</th><th>Doel</th><th>Bewaartermijn</th></tr></thead>
+      <tbody>
+        <tr><td>pactly_session</td><td>Ingelogd houden van de gebruiker</td><td>Sessie</td></tr>
+        <tr><td>pactly_auth</td><td>Authenticatie en beveiliging</td><td>30 dagen</td></tr>
+        <tr><td>pactly_prefs</td><td>Opslaan van gebruikersvoorkeuren</td><td>1 jaar</td></tr>
+        <tr><td>cookie_consent</td><td>Opslaan van cookievoorkeur bezoeker</td><td>1 jaar</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Analytische cookies (toestemming vereist)</h3>
+    <p>Deze cookies helpen ons te begrijpen hoe bezoekers de website gebruiken, zodat wij de dienst kunnen verbeteren. Ze worden alleen geplaatst na uw toestemming.</p>
+    <table>
+      <thead><tr><th>Aanbieder</th><th>Doel</th><th>Bewaartermijn</th></tr></thead>
+      <tbody>
+        <tr><td>Google Analytics (indien gebruikt)</td><td>Bezoekersstatistieken, paginaweergaven, gebruikspatronen</td><td>2 jaar</td></tr>
+        <tr><td>Hotjar (indien gebruikt)</td><td>Heatmaps, sessie-opnames voor UX-verbetering</td><td>1 jaar</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Marketing- en trackingcookies (toestemming vereist)</h3>
+    <p>Deze cookies worden gebruikt voor gerichte advertenties en het meten van campagnes. Ze worden alleen geplaatst na uw uitdrukkelijke toestemming.</p>
+    <table>
+      <thead><tr><th>Aanbieder</th><th>Doel</th><th>Bewaartermijn</th></tr></thead>
+      <tbody>
+        <tr><td>Meta Pixel (indien gebruikt)</td><td>Advertentie-effectiviteit meten, retargeting</td><td>90 dagen</td></tr>
+        <tr><td>Google Ads (indien gebruikt)</td><td>Conversietracking, advertentiepersonalisatie</td><td>90 dagen</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Affiliate-tracking cookies</h3>
+    <p>Wanneer u via Pactly doorklikt naar een partner (energieleverancier, verzekeraar, telecomaanbieder), kunnen deze partijen cookies plaatsen om de verwijzing bij te houden voor commissiedoeleinden. Pactly heeft geen controle over deze cookies. Raadpleeg het privacybeleid van de betreffende partner voor meer informatie.</p>
+
+    <h2>3. localStorage</h2>
+    <p>Naast cookies maakt Pactly gebruik van localStorage — een vergelijkbare technologie in uw browser. Hierin worden uw contractgegevens lokaal opgeslagen wanneer u de gratis versie gebruikt. Deze gegevens verlaten uw apparaat niet, tenzij u synchronisatie heeft ingeschakeld. U kunt de localStorage-gegevens van Pactly wissen via de instellingen van uw browser of via uw accountinstellingen.</p>
+
+    <h2>4. Cookies beheren en verwijderen</h2>
+    <p>U kunt uw cookievoorkeuren op elk moment aanpassen via de cookiebanner op pactly.nl (toegankelijk via de link "Cookievoorkeuren" in de footer).</p>
+    <p>Daarnaast kunt u cookies beheren via uw browserinstellingen:</p>
+    <ul>
+      <li><strong>Chrome:</strong> Instellingen → Privacy en beveiliging → Cookies</li>
+      <li><strong>Safari:</strong> Instellingen → Safari → Privacy en beveiliging</li>
+      <li><strong>Firefox:</strong> Instellingen → Privacy en beveiliging</li>
+      <li><strong>Edge:</strong> Instellingen → Cookies en sitemachtigingen</li>
+    </ul>
+    <p>Let op: het uitschakelen van functionele cookies kan de werking van het platform beïnvloeden.</p>
+
+    <h2>5. Toestemming</h2>
+    <p>Voor het plaatsen van niet-functionele cookies vragen wij uw toestemming via een cookiebanner bij uw eerste bezoek aan pactly.nl. U kunt toestemming altijd intrekken via "Cookievoorkeuren" in de footer van de website.</p>
+
+    <h2>6. Wijzigingen</h2>
+    <p>Wij kunnen deze Cookieverklaring aanpassen als wij nieuwe cookies introduceren of bestaande cookies wijzigen. De actuele versie is altijd beschikbaar op pactly.nl/cookies.</p>
+
+    <h2>7. Contact</h2>
+    <p>Vragen over ons cookiegebruik? Neem contact op via hallo@pactly.nl.</p>
+    <p>Toms Ambitie — Cleyndertstraat 16, 8044 PP Zwolle — KVK 70590907 — BTW NL002010180B20 — hallo@pactly.nl</p>
+
+  </div>
+
+  <div class="doc-actions">
+    <button class="btn-grad" onclick="window.print()">Afdrukken / Opslaan als PDF</button>
+    <button class="btn-ghost" onclick="showDoc('av')">← Terug naar Algemene Voorwaarden</button>
+  </div>
+</div>
+
+</main>
+
+<script>
+function showDoc(id){
+  document.querySelectorAll('.doc-section').forEach(s=>s.classList.remove('active'))
+  document.querySelectorAll('.doc-tab').forEach(t=>t.classList.remove('active'))
+  document.getElementById('doc-'+id).classList.add('active')
+  document.querySelectorAll('.doc-tab')[['av','privacy','cookie'].indexOf(id)].classList.add('active')
+  window.scrollTo({top:0,behavior:'smooth'})
+  history.replaceState(null,'',location.pathname+'?doc='+id)
+}
+// Open the correct tab based on ?doc= query parameter
+;(function(){
+  const doc=new URLSearchParams(location.search).get('doc')
+  if(doc&&['av','privacy','cookie'].includes(doc))showDoc(doc)
+})()
+</script>
+</body>
+</html>

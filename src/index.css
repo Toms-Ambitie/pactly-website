@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-violet:       #5B3FE8;
+  --color-violet-dark:  #3D28C4;
+  --color-violet-light: #F4F0FF;
+  --color-coral:        #E8357A;
+  --color-coral-light:  #FFF0F6;
+  --color-lime:         #F7FF5C;
+  --color-orange:       #FF7A35;
+  --color-dark:         #1A1A2E;
+  --color-dark-mid:     #2D2D4E;
+  --color-mid:          #6B6B8A;
+  --color-light:        #F8F7FF;
+  --color-white:        #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  background: var(--color-light);
+  color: var(--color-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c4c4d4; border-radius: 4px; }
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.22s cubic-bezier(0.4, 0, 0.2, 1) both; }
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in { animation: fade-in 0.2s ease both; }

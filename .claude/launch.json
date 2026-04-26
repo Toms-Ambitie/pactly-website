@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "pactly-app",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["/Users/tommulder/Documents/Claude Code/pactly/start-dev.sh"],
+      "port": 5174
+    }
+  ]
+}
