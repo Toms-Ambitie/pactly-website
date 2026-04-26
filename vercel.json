@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/app",   "destination": "/app.html"   },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/legal", "destination": "/legal.html" }
+  ],
+  "redirects": [
+    { "source": "/", "has": [{ "type": "host", "value": "pactly.nl" }], "destination": "https://www.pactly.nl", "permanent": true }
+  ]
+}
