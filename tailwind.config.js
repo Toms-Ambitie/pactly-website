@@ -4,20 +4,33 @@ export default {
   theme: {
     extend: {
       colors: {
-        violet:  { DEFAULT: '#5B3FE8', dark: '#3D28C4', light: '#F4F0FF' },
-        coral:   { DEFAULT: '#E8357A', light: '#FFF0F6' },
-        lime:    '#F7FF5C',
-        orange:  '#FF7A35',
-        dark:    { DEFAULT: '#1A1A2E', mid: '#2D2D4E' },
-        mid:     '#6B6B8A',
-        light:   '#F8F7FF',
+        // Primaire merkkleuren (Brandbook v3.0)
+        violet:   {
+          DEFAULT: '#4B519E',
+          400:     '#6B72B8',
+          300:     '#9098C8',
+          dark:    '#363B7A',
+          light:   '#E7E8F4',
+        },
+        coral:    { DEFAULT: '#FF6B7D', light: '#FFE3E7' },
+        mint:     { DEFAULT: '#22D3A6', light: '#D6F5EA' },
+        sun:      { DEFAULT: '#FFD86B', light: '#FFF8DC' },
+        // Neutrale kleuren
+        softgray: '#F2F4F7',
+        line:     '#E4E1F0',
+        lavender: '#E7E8F4',
+        // Backward-compat aliassen
+        dark:     { DEFAULT: '#181A2B', mid: '#2A2C47' },
+        mid:      '#6B6A7A',
+        light:    '#FAFAFC',
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['"Space Mono"', 'ui-monospace', 'monospace'],
+        sans: ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       backgroundImage: {
-        'pactly-gradient': 'linear-gradient(135deg, #5B3FE8 0%, #E8357A 100%)',
+        'pactly-hex':      'linear-gradient(160deg, #9098C8 0%, #4B519E 100%)',
+        'pactly-gradient': 'linear-gradient(135deg, #6B72B8 0%, #4B519E 100%)',
       },
     },
   },

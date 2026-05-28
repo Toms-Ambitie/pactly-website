@@ -16,7 +16,7 @@ export function UrgentBanner({ contracts, onViewUrgent }: UrgentBannerProps) {
       className="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer group"
       style={{
         background: 'rgba(232, 53, 122, 0.08)',
-        borderLeft: '3px solid #E8357A',
+        borderLeft: '3px solid #FF6B7D',
       }}
       onClick={onViewUrgent}
     >

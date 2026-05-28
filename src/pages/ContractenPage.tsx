@@ -82,11 +82,11 @@ export function ContractenPage({ typeFilter, contracts, members, onAdd, onUpdate
       {/* Header */}
       <div
         className="px-4 sm:px-5 pt-6 sm:pt-8 pb-5 sm:pb-6 relative overflow-hidden border-b border-gray-100"
-        style={{ background: isAbo ? 'linear-gradient(160deg, #FFF0F6 0%, #FDF9FF 100%)' : 'linear-gradient(160deg, #F4F0FF 0%, #FBF9FF 100%)' }}
+        style={{ background: isAbo ? 'linear-gradient(160deg, #FFE3E7 0%, #FDF9FF 100%)' : 'linear-gradient(160deg, #E7E8F4 0%, #FBF9FF 100%)' }}
       >
         <div
           className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-25 -translate-y-1/4 translate-x-1/4"
-          style={{ background: isAbo ? 'radial-gradient(circle, #E8357A, transparent)' : 'radial-gradient(circle, #5B3FE8, transparent)' }}
+          style={{ background: isAbo ? 'radial-gradient(circle, #FF6B7D, transparent)' : 'radial-gradient(circle, #4B519E, transparent)' }}
         />
         <div className="relative z-10 flex items-end justify-between mb-4">
           <div>

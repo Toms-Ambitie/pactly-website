@@ -14,11 +14,11 @@ export function Onboarding({ onStart }: OnboardingProps) {
       {/* Gradient orbs */}
       <div
         className="absolute top-1/4 left-1/2 w-[500px] h-[500px] rounded-full -translate-x-1/2 -translate-y-1/2 opacity-20"
-        style={{ background: 'radial-gradient(circle, #5B3FE8, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #4B519E, transparent 70%)' }}
       />
       <div
         className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] rounded-full opacity-15"
-        style={{ background: 'radial-gradient(circle, #E8357A, transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, #FF6B7D, transparent 70%)' }}
       />
 
       <div className="relative z-10 flex flex-col items-center text-center max-w-sm animate-slide-up">

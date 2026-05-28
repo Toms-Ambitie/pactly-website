@@ -21,23 +21,68 @@ const NAV: { id: Page; label: string; icon: React.ReactNode; section?: string }[
   { id: 'meldingen',   label: 'Meldingen',       icon: <Bell size={18} /> },
 ];
 
+/** Hexagoon-beeldmerk — Pactly Brandbook v3.0 */
+export function PactlyMark({ size = 36 }: { size?: number }) {
+  const uid = Math.random().toString(36).slice(2, 8);
+  return (
+    <svg
+      width={size}
+      height={Math.round(size * 1.15)}
+      viewBox="0 0 40 46"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Pactly beeldmerk"
+    >
+      <defs>
+        <linearGradient id={`hg-${uid}`} x1="0" y1="0" x2="40" y2="46" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#9098C8" />
+          <stop offset="100%" stopColor="#4B519E" />
+        </linearGradient>
+      </defs>
+      {/* Hexagoon (pointy-top, ratio 1:0.866 per brandbook) */}
+      <polygon
+        points="20,2 37.3,11.5 37.3,34.5 20,44 2.7,34.5 2.7,11.5"
+        fill={`url(#hg-${uid})`}
+      />
+      {/* P — open stroke met ronde caps (Brandbook: Stem 12pt) */}
+      <path
+        d="M 14 35 V 11 Q 27 11 27 18.5 Q 27 26 14 26"
+        stroke="white"
+        strokeWidth="3.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+/** Volledig woordmerk: beeldmerk + "Pactly." met coral punt */
+export function PactlyWordmark() {
+  return (
+    <div className="flex items-center gap-3">
+      <PactlyMark size={32} />
+      <div>
+        <div className="flex items-baseline">
+          <span style={{ fontWeight: 700, fontSize: 17, lineHeight: 1, letterSpacing: '-0.02em', color: '#181A2B' }}>
+            Pactly
+          </span>
+          <span style={{ fontWeight: 700, fontSize: 17, lineHeight: 1, color: '#FF6B7D' }}>.</span>
+        </div>
+        <div style={{ fontSize: 11, marginTop: 3, fontWeight: 500, color: '#6B6A7A' }}>
+          contractbeheer
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Sidebar({ current, onChange, urgentCount, unreadCount, onUploadContract, onAddAbonnement }: SidebarProps) {
   return (
-    <aside className="hidden sm:flex flex-col w-56 min-w-[14rem] bg-white border-r border-gray-200 h-full">
+    <aside className="hidden sm:flex flex-col w-56 min-w-[14rem] bg-white border-r h-full" style={{ borderColor: '#E4E1F0' }}>
       {/* Logo */}
-      <div className="px-5 py-5 flex items-center gap-3 border-b border-gray-100">
-        <div className="w-9 h-9 rounded-xl bg-pactly-gradient flex items-center justify-center flex-shrink-0 shadow-sm">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M3 4h8l3 3v7H3V4z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-            <path d="M10 4v3h3" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-            <line x1="6" y1="9" x2="12" y2="9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="6" y1="12" x2="10" y2="12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-          </svg>
-        </div>
-        <div>
-          <div className="text-dark font-extrabold text-base leading-none tracking-tight">Pactly</div>
-          <div className="text-mid text-xs mt-0.5">contractbeheer</div>
-        </div>
+      <div className="px-5 py-5 border-b" style={{ borderColor: '#E4E1F0' }}>
+        <PactlyWordmark />
       </div>
 
       {/* Nav */}
@@ -54,22 +99,31 @@ export function Sidebar({ current, onChange, urgentCount, unreadCount, onUploadC
             <React.Fragment key={item.id}>
               {showSection && (
                 <div className="px-3 pt-4 pb-1">
-                  <span className="text-gray-400 text-[10px] font-semibold uppercase tracking-widest">{item.section}</span>
+                  <span style={{ color: '#6B6A7A', fontSize: 10, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                    {item.section}
+                  </span>
                 </div>
               )}
               <button
                 onClick={() => onChange(item.id)}
-                className={[
-                  'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all relative',
-                  active
-                    ? 'bg-violet text-white shadow-sm'
-                    : 'text-mid hover:bg-gray-50 hover:text-dark',
-                ].join(' ')}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all relative"
+                style={active
+                  ? { backgroundColor: 'rgba(75,81,158,0.08)', color: '#4B519E' }
+                  : { color: '#6B6A7A' }
+                }
+                onMouseEnter={e => { if (!active) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = '#F2F4F7'; el.style.color = '#181A2B'; } }}
+                onMouseLeave={e => { if (!active) { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = '#6B6A7A'; } }}
               >
                 {item.icon}
                 {item.label}
                 {badge > 0 && (
-                  <span className={`ml-auto text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ${active ? 'bg-white/25 text-white' : 'bg-coral text-white'}`}>
+                  <span
+                    className="ml-auto text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+                    style={active
+                      ? { backgroundColor: '#4B519E', color: 'white' }
+                      : { backgroundColor: '#FF6B7D', color: 'white' }
+                    }
+                  >
                     {badge > 9 ? '9+' : badge}
                   </span>
                 )}
@@ -78,16 +132,17 @@ export function Sidebar({ current, onChange, urgentCount, unreadCount, onUploadC
           );
         })}
 
-        {/* Divider + Settings */}
-        <div className="border-t border-gray-100 mt-2 pt-2">
+        {/* Divider + Instellingen */}
+        <div className="mt-2 pt-2" style={{ borderTop: '1px solid #E4E1F0' }}>
           <button
             onClick={() => onChange('settings')}
-            className={[
-              'w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all',
-              current === 'settings'
-                ? 'bg-violet text-white shadow-sm'
-                : 'text-mid hover:bg-gray-50 hover:text-dark',
-            ].join(' ')}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all"
+            style={current === 'settings'
+              ? { backgroundColor: 'rgba(75,81,158,0.08)', color: '#4B519E' }
+              : { color: '#6B6A7A' }
+            }
+            onMouseEnter={e => { if (current !== 'settings') { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = '#F2F4F7'; el.style.color = '#181A2B'; } }}
+            onMouseLeave={e => { if (current !== 'settings') { const el = e.currentTarget as HTMLElement; el.style.backgroundColor = ''; el.style.color = '#6B6A7A'; } }}
           >
             <Settings size={18} />
             Instellingen
@@ -95,19 +150,20 @@ export function Sidebar({ current, onChange, urgentCount, unreadCount, onUploadC
         </div>
       </nav>
 
-      {/* Primary CTAs */}
+      {/* Primaire CTA's — volgorde per Brandbook §7 */}
       <div className="px-3 pb-3 flex flex-col gap-2">
         <button
           onClick={onUploadContract}
-          className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-pactly-gradient text-white text-sm font-bold shadow-sm hover:opacity-90 hover:-translate-y-0.5 transition-all"
+          className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-white text-sm font-bold shadow-sm hover:opacity-90 hover:-translate-y-0.5 transition-all"
+          style={{ background: 'linear-gradient(135deg, #6B72B8 0%, #4B519E 100%)' }}
         >
           <Upload size={15} />
           Contract uploaden
         </button>
         <button
           onClick={onAddAbonnement}
-          className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border text-violet text-sm font-semibold transition-all hover:opacity-80"
-          style={{ backgroundColor: 'rgba(91,63,232,0.07)', borderColor: 'rgba(91,63,232,0.20)' }}
+          className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border text-sm font-semibold transition-all hover:opacity-80"
+          style={{ backgroundColor: 'rgba(75,81,158,0.06)', borderColor: 'rgba(75,81,158,0.20)', color: '#4B519E' }}
         >
           <Plus size={15} />
           Abonnement toevoegen
@@ -115,8 +171,8 @@ export function Sidebar({ current, onChange, urgentCount, unreadCount, onUploadC
       </div>
 
       {/* Footer */}
-      <div className="px-5 py-3 border-t border-gray-100">
-        <p className="text-xs text-gray-400 font-mono">Pactly MVP v1.0</p>
+      <div className="px-5 py-3" style={{ borderTop: '1px solid #E4E1F0' }}>
+        <p className="text-xs font-mono" style={{ color: '#6B6A7A' }}>Pactly MVP v1.0</p>
       </div>
     </aside>
   );

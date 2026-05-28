@@ -159,7 +159,7 @@ export function Timeline({ contracts, onSelect }: TimelineProps) {
                           left: `${startPct}%`,
                           width: `${widthPct}%`,
                           backgroundColor: barColor === '#F7FF5C' ? '#F7FF5C' : barColor,
-                          color: barColor === '#F7FF5C' ? '#1A1A2E' : '#ffffff',
+                          color: barColor === '#F7FF5C' ? '#181A2B' : '#ffffff',
                         }}
                         title={c.name}
                       >

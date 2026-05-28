@@ -29,7 +29,7 @@ export function ContractCard({ contract, members = [], onClick, view = 'grid' }:
 
   const betaler   = members.find(m => m.id === contract.betaler);
   const beheerder = members.find(m => m.id === contract.beheerder);
-  const barColor  = statMeta.barColor === '#F7FF5C' ? '#6B6B8A' : statMeta.barColor;
+  const barColor  = statMeta.barColor === '#F7FF5C' ? '#6B6A7A' : statMeta.barColor;
 
   // ─── LIST view (compact row) ───────────────────────────────────────────────
   if (view === 'list') {

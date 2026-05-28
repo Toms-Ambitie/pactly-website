@@ -51,10 +51,10 @@ function DonutChart({ slices, total }: { slices: DonutSlice[]; total: number }) 
           style={{ transition: 'stroke-dasharray 0.5s ease' }}
         />
       ))}
-      <text x={cx} y={cy - 7} textAnchor="middle" fontSize={11} fill="#6B6B8A" fontFamily="Space Mono, monospace">
+      <text x={cx} y={cy - 7} textAnchor="middle" fontSize={11} fill="#6B6A7A" fontFamily="Space Mono, monospace">
         per maand
       </text>
-      <text x={cx} y={cy + 10} textAnchor="middle" fontSize={14} fontWeight="800" fill="#1A1A2E" fontFamily="Plus Jakarta Sans, sans-serif">
+      <text x={cx} y={cy + 10} textAnchor="middle" fontSize={14} fontWeight="800" fill="#181A2B" fontFamily="Plus Jakarta Sans, sans-serif">
         {formatEuro(total)}
       </text>
     </svg>
@@ -96,8 +96,8 @@ export function Kosten({ contracts, members }: KostenProps) {
   const contractAmount   = activeContracts.filter(c => c.type === 'contract').reduce((s, c) => s + c.monthlyAmount, 0);
   const abonnementAmount = activeContracts.filter(c => c.type === 'abonnement').reduce((s, c) => s + c.monthlyAmount, 0);
   const byType = [
-    { label: 'Contracten',   icon: '📄', color: '#5B3FE8', amount: contractAmount  },
-    { label: 'Abonnementen', icon: '📦', color: '#E8357A', amount: abonnementAmount },
+    { label: 'Contracten',   icon: '📄', color: '#4B519E', amount: contractAmount  },
+    { label: 'Abonnementen', icon: '📦', color: '#FF6B7D', amount: abonnementAmount },
   ].filter(t => t.amount > 0);
 
   // Donut slices
@@ -119,11 +119,11 @@ export function Kosten({ contracts, members }: KostenProps) {
       {/* Header */}
       <div
         className="px-4 sm:px-5 pt-6 sm:pt-8 pb-5 sm:pb-6 relative overflow-hidden border-b border-gray-100"
-        style={{ background: 'linear-gradient(160deg, #F4F0FF 0%, #FBF9FF 100%)' }}
+        style={{ background: 'linear-gradient(160deg, #E7E8F4 0%, #FBF9FF 100%)' }}
       >
         <div
           className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-25 -translate-y-1/4 translate-x-1/4"
-          style={{ background: 'radial-gradient(circle, #5B3FE8, transparent)' }}
+          style={{ background: 'radial-gradient(circle, #4B519E, transparent)' }}
         />
         <div className="relative z-10">
           <h1 className="text-2xl font-extrabold text-dark mb-1">Kosten</h1>
@@ -138,7 +138,7 @@ export function Kosten({ contracts, members }: KostenProps) {
           {/* Total per month — accent background */}
           <div
             className="rounded-2xl p-4 sm:p-5 col-span-1"
-            style={{ background: 'linear-gradient(135deg, #5B3FE8 0%, #7B5FF0 100%)' }}
+            style={{ background: 'linear-gradient(135deg, #4B519E 0%, #7B5FF0 100%)' }}
           >
             <div className="text-xs font-semibold uppercase tracking-wide text-white/70 mb-2">Per maand</div>
             <div className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">{formatEuro(totalMonthly)}</div>

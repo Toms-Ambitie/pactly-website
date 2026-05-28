@@ -66,7 +66,7 @@ export function ContractDetail({ contract, members = [], onBack, onUpdate, onDel
     }
   };
 
-  const barColor = statMeta.barColor === '#F7FF5C' ? '#6B6B8A' : statMeta.barColor;
+  const barColor = statMeta.barColor === '#F7FF5C' ? '#6B6A7A' : statMeta.barColor;
 
   return (
     <>
@@ -247,7 +247,7 @@ export function ContractDetail({ contract, members = [], onBack, onUpdate, onDel
             <div
               className="rounded-2xl border p-4 sm:p-5"
               style={{
-                background: `linear-gradient(135deg, ${catMeta.color}06 0%, rgba(91,63,232,0.04) 100%)`,
+                background: `linear-gradient(135deg, ${catMeta.color}06 0%, rgba(75,81,158,0.04) 100%)`,
                 borderColor: `${catMeta.color}20`,
               }}
             >

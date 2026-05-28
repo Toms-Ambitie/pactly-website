@@ -75,19 +75,19 @@ function StatusBadge({ status }: { status: AdminUser['status'] }) {
 
 function PlanBadge({ plan }: { plan: AdminUser['plan'] }) {
   return plan === 'premium'
-    ? <span className="px-2 py-0.5 rounded-full text-xs font-bold border bg-violet-50 text-[#5B3FE8] border-violet-200">⭐ Plus</span>
+    ? <span className="px-2 py-0.5 rounded-full text-xs font-bold border bg-violet-50 text-[#4B519E] border-violet-200">⭐ Plus</span>
     : <span className="px-2 py-0.5 rounded-full text-xs font-semibold border bg-gray-100 text-gray-500 border-gray-200">Free</span>;
 }
 
 function KpiCard({ label, value, sub, accent = false, color, delta }: { label: string; value: string | number; sub?: string; accent?: boolean; color?: 'green' | 'amber' | 'red'; delta?: string }) {
   const bg        = accent ? 'bg-violet-50 border-violet-200' : color === 'green' ? 'bg-emerald-50 border-emerald-200' : color === 'amber' ? 'bg-amber-50 border-amber-200' : color === 'red' ? 'bg-red-50 border-red-200' : 'bg-white border-gray-100';
-  const textColor = accent ? 'text-[#5B3FE8]' : color === 'green' ? 'text-emerald-700' : color === 'amber' ? 'text-amber-700' : color === 'red' ? 'text-red-600' : 'text-[#1A1A2E]';
+  const textColor = accent ? 'text-[#4B519E]' : color === 'green' ? 'text-emerald-700' : color === 'amber' ? 'text-amber-700' : color === 'red' ? 'text-red-600' : 'text-[#181A2B]';
   return (
     <div className={`rounded-xl border p-5 ${bg}`}>
-      <p className="text-xs text-[#6B6B8A] uppercase tracking-wider font-mono mb-1">{label}</p>
+      <p className="text-xs text-[#6B6A7A] uppercase tracking-wider font-mono mb-1">{label}</p>
       <p className={`text-3xl font-extrabold ${textColor}`}>{value}</p>
       {delta && <p className="text-xs text-emerald-600 mt-0.5 font-mono">{delta}</p>}
-      {sub && <p className="text-xs text-[#6B6B8A] mt-1">{sub}</p>}
+      {sub && <p className="text-xs text-[#6B6A7A] mt-1">{sub}</p>}
     </div>
   );
 }
@@ -95,7 +95,7 @@ function KpiCard({ label, value, sub, accent = false, color, delta }: { label: s
 function SectionTitle({ icon, title, sub }: { icon: string; title: string; sub?: string }) {
   return (
     <div className="mb-3">
-      <p className="text-xs text-[#6B6B8A] uppercase tracking-wider font-mono flex items-center gap-2">
+      <p className="text-xs text-[#6B6A7A] uppercase tracking-wider font-mono flex items-center gap-2">
         <span>{icon}</span>{title}
       </p>
       {sub && <p className="text-xs text-gray-400 mt-0.5">{sub}</p>}
@@ -103,13 +103,13 @@ function SectionTitle({ icon, title, sub }: { icon: string; title: string; sub?:
   );
 }
 
-function FeatureBar({ label, used, total, color = 'bg-[#5B3FE8]' }: { label: string; used: number; total: number; color?: string }) {
+function FeatureBar({ label, used, total, color = 'bg-[#4B519E]' }: { label: string; used: number; total: number; color?: string }) {
   const p = pct(used, total);
   return (
     <div>
       <div className="flex justify-between text-xs mb-1">
-        <span className="text-[#1A1A2E]">{label}</span>
-        <span className="text-[#6B6B8A] font-mono">{used}/{total} · {p}%</span>
+        <span className="text-[#181A2B]">{label}</span>
+        <span className="text-[#6B6A7A] font-mono">{used}/{total} · {p}%</span>
       </div>
       <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
         <div className={`h-full ${color} rounded-full transition-all`} style={{ width: `${p}%` }} />
@@ -134,46 +134,46 @@ function UserDetailModal({ user, onClose, onStatusChange }: { user: AdminUser; o
       <div className="bg-white border border-gray-200 rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6 space-y-5 shadow-xl" onClick={e => e.stopPropagation()}>
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-xs text-[#6B6B8A] font-mono mb-0.5">ACCOUNT · {user.id.toUpperCase()}</p>
-            <h2 className="text-[#1A1A2E] font-bold text-lg">{user.email}</h2>
+            <p className="text-xs text-[#6B6A7A] font-mono mb-0.5">ACCOUNT · {user.id.toUpperCase()}</p>
+            <h2 className="text-[#181A2B] font-bold text-lg">{user.email}</h2>
             <div className="flex items-center gap-2 mt-1.5 flex-wrap">
               <PlanBadge plan={user.plan} />
               <StatusBadge status={user.status} />
               {isAtRisk && <span className="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">⚠️ Risico op churn</span>}
             </div>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-[#1A1A2E] text-2xl leading-none ml-4">×</button>
+          <button onClick={onClose} className="text-gray-400 hover:text-[#181A2B] text-2xl leading-none ml-4">×</button>
         </div>
 
         {/* Account info */}
         <div className="grid grid-cols-2 gap-3 text-sm">
-          <div><p className="text-[#6B6B8A] text-xs mb-0.5">Geregistreerd</p><p className="text-[#1A1A2E]">{formatDate(user.registeredAt)}</p></div>
-          <div><p className="text-[#6B6B8A] text-xs mb-0.5">Lid (maanden)</p><p className="text-[#1A1A2E]">{memberMonths} mnd</p></div>
-          <div><p className="text-[#6B6B8A] text-xs mb-0.5">Laatste activiteit</p><p className={`font-medium ${daysSinceActive > 30 ? 'text-amber-600' : 'text-[#1A1A2E]'}`}>{relativeDate(user.lastActiveAt)}</p></div>
-          <div><p className="text-[#6B6B8A] text-xs mb-0.5">Contracten / abo's</p><p className="text-[#1A1A2E]">{user.contractCount} / {user.subscriptionCount}</p></div>
-          <div className="col-span-2"><p className="text-[#6B6B8A] text-xs mb-0.5">Gem. maandlasten (getrackt)</p><p className="text-[#1A1A2E] font-semibold">{euros(user.avgMonthlyCost)}<span className="text-[#6B6B8A] text-xs font-normal ml-1">/mnd · {euros(user.avgMonthlyCost * 12)}/jr</span></p></div>
+          <div><p className="text-[#6B6A7A] text-xs mb-0.5">Geregistreerd</p><p className="text-[#181A2B]">{formatDate(user.registeredAt)}</p></div>
+          <div><p className="text-[#6B6A7A] text-xs mb-0.5">Lid (maanden)</p><p className="text-[#181A2B]">{memberMonths} mnd</p></div>
+          <div><p className="text-[#6B6A7A] text-xs mb-0.5">Laatste activiteit</p><p className={`font-medium ${daysSinceActive > 30 ? 'text-amber-600' : 'text-[#181A2B]'}`}>{relativeDate(user.lastActiveAt)}</p></div>
+          <div><p className="text-[#6B6A7A] text-xs mb-0.5">Contracten / abo's</p><p className="text-[#181A2B]">{user.contractCount} / {user.subscriptionCount}</p></div>
+          <div className="col-span-2"><p className="text-[#6B6A7A] text-xs mb-0.5">Gem. maandlasten (getrackt)</p><p className="text-[#181A2B] font-semibold">{euros(user.avgMonthlyCost)}<span className="text-[#6B6A7A] text-xs font-normal ml-1">/mnd · {euros(user.avgMonthlyCost * 12)}/jr</span></p></div>
         </div>
 
         {/* Payment info */}
         {user.plan === 'premium' && user.payment && (
           <div className="bg-violet-50 border border-violet-200 rounded-xl p-4 text-sm space-y-2.5">
-            <p className="text-xs text-[#5B3FE8] uppercase tracking-wider font-mono">Betaalinformatie</p>
+            <p className="text-xs text-[#4B519E] uppercase tracking-wider font-mono">Betaalinformatie</p>
             <div className="grid grid-cols-2 gap-2">
-              <div><p className="text-[#6B6B8A] text-xs mb-0.5">Methode</p><p className="text-[#1A1A2E] font-medium">{user.payment.method}</p></div>
-              <div><p className="text-[#6B6B8A] text-xs mb-0.5">Cyclus</p><p className="text-[#1A1A2E] capitalize">{user.payment.cycle}</p></div>
-              <div><p className="text-[#6B6B8A] text-xs mb-0.5">Betaald sinds</p><p className="text-[#1A1A2E]">{formatDate(user.payment.paidSince)}</p></div>
-              <div><p className="text-[#6B6B8A] text-xs mb-0.5">Totaal betaald</p><p className="text-emerald-600 font-bold">{euros(user.payment.totalPaid)}</p></div>
+              <div><p className="text-[#6B6A7A] text-xs mb-0.5">Methode</p><p className="text-[#181A2B] font-medium">{user.payment.method}</p></div>
+              <div><p className="text-[#6B6A7A] text-xs mb-0.5">Cyclus</p><p className="text-[#181A2B] capitalize">{user.payment.cycle}</p></div>
+              <div><p className="text-[#6B6A7A] text-xs mb-0.5">Betaald sinds</p><p className="text-[#181A2B]">{formatDate(user.payment.paidSince)}</p></div>
+              <div><p className="text-[#6B6A7A] text-xs mb-0.5">Totaal betaald</p><p className="text-emerald-600 font-bold">{euros(user.payment.totalPaid)}</p></div>
             </div>
-            <p className="text-xs text-[#6B6B8A]">Betaalstatus: <span className="text-emerald-600 font-semibold">✓ Voldaan</span> · Volledige betaalgegevens via betaalprovider (AVG art. 5.1.c)</p>
+            <p className="text-xs text-[#6B6A7A]">Betaalstatus: <span className="text-emerald-600 font-semibold">✓ Voldaan</span> · Volledige betaalgegevens via betaalprovider (AVG art. 5.1.c)</p>
           </div>
         )}
 
         {/* Feature usage */}
         <div>
-          <p className="text-xs text-[#6B6B8A] uppercase tracking-wider mb-2">Features in gebruik</p>
+          <p className="text-xs text-[#6B6A7A] uppercase tracking-wider mb-2">Features in gebruik</p>
           <div className="grid grid-cols-2 gap-2">
             {(Object.keys(user.features) as Array<keyof AdminUser['features']>).map(key => (
-              <div key={key} className={`flex items-center gap-2 text-xs px-3 py-2 rounded-lg ${user.features[key] ? 'bg-violet-50 text-[#5B3FE8]' : 'bg-gray-100 text-gray-400'}`}>
+              <div key={key} className={`flex items-center gap-2 text-xs px-3 py-2 rounded-lg ${user.features[key] ? 'bg-violet-50 text-[#4B519E]' : 'bg-gray-100 text-gray-400'}`}>
                 <span>{user.features[key] ? '✓' : '·'}</span><span>{featureLabels[key]}</span>
               </div>
             ))}
@@ -188,12 +188,12 @@ function UserDetailModal({ user, onClose, onStatusChange }: { user: AdminUser; o
 
         {/* Support actions */}
         <div className="space-y-2">
-          <p className="text-xs text-[#6B6B8A] uppercase tracking-wider">Support-acties</p>
+          <p className="text-xs text-[#6B6A7A] uppercase tracking-wider">Support-acties</p>
           <div className="grid grid-cols-2 gap-2">
-            <button onClick={() => { setResetSent(true); setTimeout(() => setResetSent(false), 3000); }} className="px-4 py-2 text-sm rounded-lg bg-gray-100 hover:bg-gray-200 text-[#1A1A2E] transition-colors">
+            <button onClick={() => { setResetSent(true); setTimeout(() => setResetSent(false), 3000); }} className="px-4 py-2 text-sm rounded-lg bg-gray-100 hover:bg-gray-200 text-[#181A2B] transition-colors">
               {resetSent ? '✓ Verstuurd' : '📧 Stuur reset-link'}
             </button>
-            <button onClick={() => { setExportDone(true); setTimeout(() => setExportDone(false), 3000); }} className="px-4 py-2 text-sm rounded-lg bg-gray-100 hover:bg-gray-200 text-[#1A1A2E] transition-colors">
+            <button onClick={() => { setExportDone(true); setTimeout(() => setExportDone(false), 3000); }} className="px-4 py-2 text-sm rounded-lg bg-gray-100 hover:bg-gray-200 text-[#181A2B] transition-colors">
               {exportDone ? '✓ Export klaar' : '📄 Data-export (AVG)'}
             </button>
           </div>
@@ -278,20 +278,20 @@ function DashboardView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white border border-gray-100 rounded-xl p-6">
-          <h3 className="text-xs text-[#6B6B8A] uppercase tracking-wider font-mono mb-5">Nieuwe registraties — 6 maanden</h3>
+          <h3 className="text-xs text-[#6B6A7A] uppercase tracking-wider font-mono mb-5">Nieuwe registraties — 6 maanden</h3>
           <div className="flex items-end gap-3 h-28">
             {months.map(m => (
               <div key={m.label} className="flex-1 flex flex-col items-center gap-1">
-                <span className="text-xs text-[#6B6B8A] font-mono">{m.count || ''}</span>
-                <div className="w-full rounded-t transition-all min-h-[4px]" style={{ height: `${Math.max((m.count / maxCount) * 80, 4)}px`, background: '#5B3FE8' }} />
-                <span className="text-xs text-[#6B6B8A]">{m.label}</span>
+                <span className="text-xs text-[#6B6A7A] font-mono">{m.count || ''}</span>
+                <div className="w-full rounded-t transition-all min-h-[4px]" style={{ height: `${Math.max((m.count / maxCount) * 80, 4)}px`, background: '#4B519E' }} />
+                <span className="text-xs text-[#6B6A7A]">{m.label}</span>
               </div>
             ))}
           </div>
         </div>
 
         <div className="bg-white border border-gray-100 rounded-xl p-6">
-          <h3 className="text-xs text-[#6B6B8A] uppercase tracking-wider font-mono mb-5">Feature adoptie</h3>
+          <h3 className="text-xs text-[#6B6A7A] uppercase tracking-wider font-mono mb-5">Feature adoptie</h3>
           <div className="space-y-4">
             <FeatureBar label="Meldingen"    used={featureUsed.meldingen}    total={users.length} />
             <FeatureBar label="Abonnementen" used={featureUsed.abonnementen} total={users.length} />
@@ -303,7 +303,7 @@ function DashboardView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
 
       {/* Quick marketing copy */}
       <div className="bg-white border border-gray-100 rounded-xl p-6">
-        <h3 className="text-xs text-[#6B6B8A] uppercase tracking-wider font-mono mb-1">📢 Marketing stats — direct kopieerbaar</h3>
+        <h3 className="text-xs text-[#6B6A7A] uppercase tracking-wider font-mono mb-1">📢 Marketing stats — direct kopieerbaar</h3>
         <p className="text-xs text-gray-400 mb-4">Gebruik deze teksten voor campagnes, socials of de website.</p>
         <div className="space-y-3">
           {[
@@ -314,10 +314,10 @@ function DashboardView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
           ].map(s => (
             <div key={s.key} className="flex items-center justify-between gap-4 bg-gray-50 border border-gray-100 rounded-lg px-4 py-3">
               <div>
-                <p className="text-xs text-[#6B6B8A] font-mono mb-0.5">{s.label}</p>
-                <p className="text-[#1A1A2E] text-sm">"{s.copy}"</p>
+                <p className="text-xs text-[#6B6A7A] font-mono mb-0.5">{s.label}</p>
+                <p className="text-[#181A2B] text-sm">"{s.copy}"</p>
               </div>
-              <button onClick={() => doCopy(s.key, s.copy)} className={`flex-shrink-0 px-3 py-1.5 text-xs rounded-lg font-semibold transition-colors ${copied === s.key ? 'bg-emerald-100 text-emerald-700' : 'bg-violet-50 hover:bg-violet-100 text-[#5B3FE8]'}`}>
+              <button onClick={() => doCopy(s.key, s.copy)} className={`flex-shrink-0 px-3 py-1.5 text-xs rounded-lg font-semibold transition-colors ${copied === s.key ? 'bg-emerald-100 text-emerald-700' : 'bg-violet-50 hover:bg-violet-100 text-[#4B519E]'}`}>
                 {copied === s.key ? '✓ Gekopieerd' : 'Kopieer'}
               </button>
             </div>
@@ -363,33 +363,33 @@ function UsersView({ users, onStatusChange }: { users: AdminUser[]; onStatusChan
 
       <div className="space-y-3">
         <input type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Zoek op e-mailadres…"
-          className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg text-[#1A1A2E] text-sm placeholder-gray-400 focus:outline-none focus:border-[#5B3FE8] transition-colors" />
+          className="w-full px-4 py-2 bg-white border border-gray-200 rounded-lg text-[#181A2B] text-sm placeholder-gray-400 focus:outline-none focus:border-[#4B519E] transition-colors" />
         <div className="flex gap-2 flex-wrap items-center">
           <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
             {(['all', 'free', 'premium'] as const).map(f => (
-              <button key={f} onClick={() => setPlanFilter(f)} className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${planFilter === f ? 'bg-[#5B3FE8] text-white' : 'text-[#6B6B8A] hover:text-[#1A1A2E]'}`}>
+              <button key={f} onClick={() => setPlanFilter(f)} className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${planFilter === f ? 'bg-[#4B519E] text-white' : 'text-[#6B6A7A] hover:text-[#181A2B]'}`}>
                 {f === 'all' ? 'Alle plannen' : f === 'free' ? 'Free' : '⭐ Plus'}
               </button>
             ))}
           </div>
           <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
             {([['all','Alle'], ['active','Actief'], ['inactive','Inactief'], ['suspended','Gesuspendeerd'], ['atrisk','⚠️ At-risk']] as const).map(([f, label]) => (
-              <button key={f} onClick={() => setStatusFilter(f as any)} className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${statusFilter === f ? 'bg-[#5B3FE8] text-white' : 'text-[#6B6B8A] hover:text-[#1A1A2E]'}`}>
+              <button key={f} onClick={() => setStatusFilter(f as any)} className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${statusFilter === f ? 'bg-[#4B519E] text-white' : 'text-[#6B6A7A] hover:text-[#181A2B]'}`}>
                 {label}
               </button>
             ))}
           </div>
           <div className="flex gap-1 bg-gray-100 rounded-lg p-1 ml-auto">
-            <span className="text-xs text-[#6B6B8A] px-2 self-center">Sorteren:</span>
+            <span className="text-xs text-[#6B6A7A] px-2 self-center">Sorteren:</span>
             {([['recent','Nieuwste'], ['active','Actief'], ['contracts','Contracten']] as const).map(([s, l]) => (
-              <button key={s} onClick={() => setSort(s)} className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${sort === s ? 'bg-white text-[#1A1A2E] shadow-sm' : 'text-[#6B6B8A] hover:text-[#1A1A2E]'}`}>{l}</button>
+              <button key={s} onClick={() => setSort(s)} className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${sort === s ? 'bg-white text-[#181A2B] shadow-sm' : 'text-[#6B6A7A] hover:text-[#181A2B]'}`}>{l}</button>
             ))}
           </div>
         </div>
       </div>
 
       <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
-        <div className="grid gap-3 px-4 py-2.5 border-b border-gray-100 text-xs text-[#6B6B8A] uppercase tracking-wider font-mono" style={{ gridTemplateColumns: '2fr 110px 110px 60px 60px 90px 150px 80px' }}>
+        <div className="grid gap-3 px-4 py-2.5 border-b border-gray-100 text-xs text-[#6B6A7A] uppercase tracking-wider font-mono" style={{ gridTemplateColumns: '2fr 110px 110px 60px 60px 90px 150px 80px' }}>
           <span>E-mail</span><span>Geregistreerd</span><span>Actief</span><span>C</span><span>A</span><span>Plan</span><span>Status</span><span/>
         </div>
         {filtered.map(u => {
@@ -398,20 +398,20 @@ function UsersView({ users, onStatusChange }: { users: AdminUser[]; onStatusChan
             <div key={u.id} className={`grid gap-3 px-4 py-3 border-b border-gray-50 last:border-0 transition-colors items-center text-sm ${atRisk ? 'hover:bg-amber-50' : 'hover:bg-gray-50'}`}
               style={{ gridTemplateColumns: '2fr 110px 110px 60px 60px 90px 150px 80px' }}>
               <div className="min-w-0">
-                <span className="text-[#1A1A2E] font-medium truncate block" title={u.email}>{u.email}</span>
-                <span className="text-[#6B6B8A] text-xs font-mono">{emailDomain(u.email)}</span>
+                <span className="text-[#181A2B] font-medium truncate block" title={u.email}>{u.email}</span>
+                <span className="text-[#6B6A7A] text-xs font-mono">{emailDomain(u.email)}</span>
               </div>
-              <span className="text-[#6B6B8A] font-mono text-xs">{formatDate(u.registeredAt)}</span>
-              <span className={`font-mono text-xs ${atRisk ? 'text-amber-600' : 'text-[#6B6B8A]'}`}>{relativeDate(u.lastActiveAt)}</span>
-              <span className="text-[#1A1A2E] font-mono">{u.contractCount}</span>
-              <span className="text-[#1A1A2E] font-mono">{u.subscriptionCount}</span>
+              <span className="text-[#6B6A7A] font-mono text-xs">{formatDate(u.registeredAt)}</span>
+              <span className={`font-mono text-xs ${atRisk ? 'text-amber-600' : 'text-[#6B6A7A]'}`}>{relativeDate(u.lastActiveAt)}</span>
+              <span className="text-[#181A2B] font-mono">{u.contractCount}</span>
+              <span className="text-[#181A2B] font-mono">{u.subscriptionCount}</span>
               <PlanBadge plan={u.plan} />
               <div className="flex gap-1 flex-wrap"><StatusBadge status={u.status} />{atRisk && <span className="text-[10px] text-amber-500">⚠️</span>}</div>
-              <button onClick={() => setSelected(u)} className="px-3 py-1.5 text-xs bg-violet-50 hover:bg-violet-100 text-[#5B3FE8] rounded-lg transition-colors">Detail →</button>
+              <button onClick={() => setSelected(u)} className="px-3 py-1.5 text-xs bg-violet-50 hover:bg-violet-100 text-[#4B519E] rounded-lg transition-colors">Detail →</button>
             </div>
           );
         })}
-        {filtered.length === 0 && <div className="px-4 py-10 text-center text-[#6B6B8A] text-sm">Geen gebruikers gevonden.</div>}
+        {filtered.length === 0 && <div className="px-4 py-10 text-center text-[#6B6A7A] text-sm">Geen gebruikers gevonden.</div>}
       </div>
       <p className="text-xs text-gray-400 font-mono">{filtered.length} van {users.length} accounts · Contractinhoud niet inzichtelijk (art. 5.1.c AVG)</p>
 
@@ -430,16 +430,16 @@ function WaitlistView({ emails }: { emails: string[] }) {
       </div>
       {emails.length === 0 ? (
         <div className="bg-white border border-gray-100 rounded-xl px-5 py-14 text-center">
-          <p className="text-[#6B6B8A] text-sm">Nog geen wachtlijst-aanmeldingen.</p>
+          <p className="text-[#6B6A7A] text-sm">Nog geen wachtlijst-aanmeldingen.</p>
           <p className="text-gray-400 text-xs mt-1">Aanmeldingen via pactly.nl verschijnen hier automatisch.</p>
         </div>
       ) : (
         <div className="bg-white border border-gray-100 rounded-xl overflow-hidden">
-          <div className="grid grid-cols-[1fr_140px] gap-4 px-4 py-2.5 border-b border-gray-100 text-xs text-[#6B6B8A] uppercase tracking-wider font-mono"><span>E-mail</span><span>Actie</span></div>
+          <div className="grid grid-cols-[1fr_140px] gap-4 px-4 py-2.5 border-b border-gray-100 text-xs text-[#6B6A7A] uppercase tracking-wider font-mono"><span>E-mail</span><span>Actie</span></div>
           {emails.map((email, i) => (
             <div key={i} className="grid grid-cols-[1fr_140px] gap-4 px-4 py-3 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors items-center text-sm">
-              <span className="text-[#1A1A2E]">{email}</span>
-              <button className="px-3 py-1.5 text-xs bg-violet-50 hover:bg-violet-100 text-[#5B3FE8] rounded-lg transition-colors">Uitnodiging sturen</button>
+              <span className="text-[#181A2B]">{email}</span>
+              <button className="px-3 py-1.5 text-xs bg-violet-50 hover:bg-violet-100 text-[#4B519E] rounded-lg transition-colors">Uitnodiging sturen</button>
             </div>
           ))}
         </div>
@@ -506,13 +506,13 @@ function FinancieelView({ users }: { users: AdminUser[] }) {
           <KpiCard label="Maandelijks" value={monthly_pl.length} sub={`${euros(monthly_pl.length * 4.99)}/mnd · ${euros(monthly_pl.length * 4.99 * 12)}/jr`} />
           <KpiCard label="Jaarlijks" value={annual_pl.length} sub={`${euros(annual_pl.length * 39)}/jr betaald vooruit`} />
           <div className="bg-white border border-gray-100 rounded-xl p-5">
-            <p className="text-xs text-[#6B6B8A] uppercase tracking-wider font-mono mb-3">Betaalmethoden</p>
+            <p className="text-xs text-[#6B6A7A] uppercase tracking-wider font-mono mb-3">Betaalmethoden</p>
             {(['iDEAL', 'Creditcard', 'PayPal'] as const).map(m => {
               const count = premium.filter(u => u.payment?.method === m).length;
               return count > 0 ? (
                 <div key={m} className="flex items-center justify-between text-sm py-1.5 border-b border-gray-100 last:border-0">
-                  <span className="text-[#6B6B8A]">{m}</span>
-                  <span className="text-[#1A1A2E] font-mono font-semibold">{count}</span>
+                  <span className="text-[#6B6A7A]">{m}</span>
+                  <span className="text-[#181A2B] font-mono font-semibold">{count}</span>
                 </div>
               ) : null;
             })}
@@ -522,36 +522,36 @@ function FinancieelView({ users }: { users: AdminUser[] }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white border border-gray-100 rounded-xl p-6">
-          <h3 className="text-xs text-[#6B6B8A] uppercase tracking-wider font-mono mb-5">MRR-groei — per maand</h3>
+          <h3 className="text-xs text-[#6B6A7A] uppercase tracking-wider font-mono mb-5">MRR-groei — per maand</h3>
           <div className="flex items-end gap-3 h-28">
             {mrrHistory.map(m => (
               <div key={m.month} className="flex-1 flex flex-col items-center gap-1">
                 <span className="text-xs text-emerald-600 font-mono">{euros(m.mrr)}</span>
                 <div className="w-full bg-emerald-500 rounded-t" style={{ height: `${Math.max((m.mrr / maxMrr) * 80, 6)}px` }} />
-                <span className="text-[10px] text-[#6B6B8A]">{m.month}</span>
+                <span className="text-[10px] text-[#6B6A7A]">{m.month}</span>
               </div>
             ))}
           </div>
-          <p className="text-xs text-[#6B6B8A] mt-3">Groei: Nov '25 {euros(4.99)} → Apr '26 {euros(mrr)} MRR (+{Math.round((mrr/4.99-1)*100)}%)</p>
+          <p className="text-xs text-[#6B6A7A] mt-3">Groei: Nov '25 {euros(4.99)} → Apr '26 {euros(mrr)} MRR (+{Math.round((mrr/4.99-1)*100)}%)</p>
         </div>
 
         <div className="bg-white border border-gray-100 rounded-xl p-6">
-          <h3 className="text-xs text-[#6B6B8A] uppercase tracking-wider font-mono mb-1">MRR-prognose (aanname: +2 Plus/mnd)</h3>
+          <h3 className="text-xs text-[#6B6A7A] uppercase tracking-wider font-mono mb-1">MRR-prognose (aanname: +2 Plus/mnd)</h3>
           <p className="text-xs text-gray-400 mb-4">Gebaseerd op huidige ARPU van {euros(arpu_prem)}/mnd per Plus-gebruiker</p>
           <div className="space-y-2.5">
-            <div className="grid grid-cols-3 text-xs text-[#6B6B8A] uppercase tracking-wider font-mono pb-1 border-b border-gray-100">
+            <div className="grid grid-cols-3 text-xs text-[#6B6A7A] uppercase tracking-wider font-mono pb-1 border-b border-gray-100">
               <span>Horizon</span><span className="text-center">Proj. MRR</span><span className="text-right">Proj. ARR</span>
             </div>
             <div className="grid grid-cols-3 text-sm py-1 border-b border-gray-100">
-              <span className="text-[#6B6B8A]">Nu</span>
+              <span className="text-[#6B6A7A]">Nu</span>
               <span className="text-center text-emerald-600 font-mono font-bold">{euros(mrr)}</span>
               <span className="text-right text-emerald-600 font-mono font-bold">{euros(arr)}</span>
             </div>
             {forecast.map(f => (
               <div key={f.label} className="grid grid-cols-3 text-sm py-1 border-b border-gray-50 last:border-0">
-                <span className="text-[#6B6B8A]">{f.label}</span>
-                <span className="text-center text-[#1A1A2E] font-mono">{euros(f.mrr)}</span>
-                <span className="text-right text-[#6B6B8A] font-mono">{euros(f.arr)}</span>
+                <span className="text-[#6B6A7A]">{f.label}</span>
+                <span className="text-center text-[#181A2B] font-mono">{euros(f.mrr)}</span>
+                <span className="text-right text-[#6B6A7A] font-mono">{euros(f.arr)}</span>
               </div>
             ))}
           </div>
@@ -585,7 +585,7 @@ function MarketingView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
 
   const funnel = [
     { label: 'Wachtlijst',               value: 243 + waitlist.length, color: 'bg-gray-300' },
-    { label: 'Geregistreerd',            value: users.length,          color: 'bg-[#5B3FE8]' },
+    { label: 'Geregistreerd',            value: users.length,          color: 'bg-[#4B519E]' },
     { label: 'Geactiveerd (≥1 contract)',value: activated.length,      color: 'bg-violet-500' },
     { label: 'Actief (30d)',              value: active30.length,       color: 'bg-violet-400' },
     { label: 'Plus-abonnee',             value: premium.length,        color: 'bg-emerald-500' },
@@ -611,10 +611,10 @@ function MarketingView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
             return (
               <div key={step.label}>
                 <div className="flex items-center justify-between text-sm mb-1.5">
-                  <span className="text-[#1A1A2E] font-medium">{step.label}</span>
+                  <span className="text-[#181A2B] font-medium">{step.label}</span>
                   <div className="flex items-center gap-3">
-                    {i > 0 && <span className="text-xs text-[#6B6B8A] font-mono">{convFromPrev}% van vorige stap</span>}
-                    <span className="text-[#1A1A2E] font-bold font-mono w-8 text-right">{step.value}</span>
+                    {i > 0 && <span className="text-xs text-[#6B6A7A] font-mono">{convFromPrev}% van vorige stap</span>}
+                    <span className="text-[#181A2B] font-bold font-mono w-8 text-right">{step.value}</span>
                   </div>
                 </div>
                 <div className="h-6 bg-gray-100 rounded-lg overflow-hidden">
@@ -626,9 +626,9 @@ function MarketingView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
             );
           })}
           <div className="pt-2 border-t border-gray-100">
-            <p className="text-xs text-[#6B6B8A]">
+            <p className="text-xs text-[#6B6A7A]">
               Overall conversie wachtlijst → Plus: <span className="text-emerald-600 font-mono font-bold">{pct(premium.length, 243 + waitlist.length)}%</span>
-              {' · '}Wachtlijst → actief gebruiker: <span className="text-[#5B3FE8] font-mono font-bold">{pct(activated.length, 243 + waitlist.length)}%</span>
+              {' · '}Wachtlijst → actief gebruiker: <span className="text-[#4B519E] font-mono font-bold">{pct(activated.length, 243 + waitlist.length)}%</span>
             </p>
           </div>
         </div>
@@ -651,11 +651,11 @@ function MarketingView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
             {domainList.map(([domain, count]) => (
               <div key={domain}>
                 <div className="flex items-center justify-between text-xs mb-1">
-                  <span className="text-[#1A1A2E] font-mono">{domain}</span>
-                  <span className="text-[#6B6B8A]">{count} · {pct(count, users.length)}%</span>
+                  <span className="text-[#181A2B] font-mono">{domain}</span>
+                  <span className="text-[#6B6A7A]">{count} · {pct(count, users.length)}%</span>
                 </div>
                 <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                  <div className="h-full rounded-full" style={{ width: `${pct(count, users.length)}%`, background: '#5B3FE8' }} />
+                  <div className="h-full rounded-full" style={{ width: `${pct(count, users.length)}%`, background: '#4B519E' }} />
                 </div>
               </div>
             ))}
@@ -669,7 +669,7 @@ function MarketingView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
         <div className="bg-white border border-gray-100 rounded-xl p-6">
           <div className="grid grid-cols-2 gap-6">
             <div>
-              <p className="text-xs text-[#6B6B8A] font-mono uppercase tracking-wider mb-3">Free ({users.filter(u=>u.plan==='free').length} gebruikers)</p>
+              <p className="text-xs text-[#6B6A7A] font-mono uppercase tracking-wider mb-3">Free ({users.filter(u=>u.plan==='free').length} gebruikers)</p>
               <div className="space-y-3">
                 {(['meldingen','abonnementen','kosten','tijdlijn'] as const).map(f => {
                   const freeUsers = users.filter(u => u.plan === 'free');
@@ -698,10 +698,10 @@ function MarketingView({ users, waitlist }: { users: AdminUser[]; waitlist: stri
           {copyStats.map(s => (
             <div key={s.key} className="flex items-start justify-between gap-4 bg-gray-50 border border-gray-100 rounded-lg px-4 py-3">
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-[#5B3FE8] font-mono mb-0.5">{s.label}</p>
-                <p className="text-[#1A1A2E] text-sm leading-relaxed">"{s.copy}"</p>
+                <p className="text-xs text-[#4B519E] font-mono mb-0.5">{s.label}</p>
+                <p className="text-[#181A2B] text-sm leading-relaxed">"{s.copy}"</p>
               </div>
-              <button onClick={() => doCopy(s.key, s.copy)} className={`flex-shrink-0 px-3 py-1.5 text-xs rounded-lg font-semibold transition-colors ${copied === s.key ? 'bg-emerald-100 text-emerald-700' : 'bg-violet-50 hover:bg-violet-100 text-[#5B3FE8]'}`}>
+              <button onClick={() => doCopy(s.key, s.copy)} className={`flex-shrink-0 px-3 py-1.5 text-xs rounded-lg font-semibold transition-colors ${copied === s.key ? 'bg-emerald-100 text-emerald-700' : 'bg-violet-50 hover:bg-violet-100 text-[#4B519E]'}`}>
                 {copied === s.key ? '✓ Gekopieerd' : 'Kopieer'}
               </button>
             </div>
@@ -722,10 +722,10 @@ function DeveloperView({ users }: { users: AdminUser[] }) {
   const light        = users.filter(u => u.contractCount >= 1 && u.contractCount < 3);
 
   const segments = [
-    { label: 'Power users',   desc: '≥ 8 contracten', count: power.length,        color: 'bg-[#5B3FE8]', text: 'text-[#5B3FE8]',   plus: power.filter(u=>u.plan==='premium').length },
+    { label: 'Power users',   desc: '≥ 8 contracten', count: power.length,        color: 'bg-[#4B519E]', text: 'text-[#4B519E]',   plus: power.filter(u=>u.plan==='premium').length },
     { label: 'Regular users', desc: '3–7 contracten',  count: regular.length,      color: 'bg-blue-500',  text: 'text-blue-600',    plus: regular.filter(u=>u.plan==='premium').length },
     { label: 'Light users',   desc: '1–2 contracten',  count: light.length,        color: 'bg-teal-500',  text: 'text-teal-600',    plus: light.filter(u=>u.plan==='premium').length },
-    { label: 'Niet actief',   desc: '0 contracten',    count: notActivated.length, color: 'bg-gray-300',  text: 'text-[#6B6B8A]',  plus: 0 },
+    { label: 'Niet actief',   desc: '0 contracten',    count: notActivated.length, color: 'bg-gray-300',  text: 'text-[#6B6A7A]',  plus: 0 },
   ];
 
   const featureUsed = {
@@ -755,8 +755,8 @@ function DeveloperView({ users }: { users: AdminUser[] }) {
                 <div className={`w-2 h-2 rounded-full ${s.color}`} />
                 <span className={`text-xs font-semibold ${s.text}`}>{s.label}</span>
               </div>
-              <p className="text-3xl font-extrabold text-[#1A1A2E]">{s.count}</p>
-              <p className="text-xs text-[#6B6B8A] mt-1">{s.desc}</p>
+              <p className="text-3xl font-extrabold text-[#181A2B]">{s.count}</p>
+              <p className="text-xs text-[#6B6A7A] mt-1">{s.desc}</p>
               <p className="text-xs text-gray-400 mt-0.5">{pct(s.count, users.length)}% van totaal · {s.plus} Plus</p>
               <div className="mt-3 h-1 bg-gray-100 rounded-full overflow-hidden">
                 <div className={`h-full ${s.color} rounded-full`} style={{ width: `${pct(s.count, users.length)}%` }} />
@@ -786,15 +786,15 @@ function DeveloperView({ users }: { users: AdminUser[] }) {
               return (
                 <div key={f}>
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-[#1A1A2E]">{f.charAt(0).toUpperCase()+f.slice(1)}</span>
-                    <span className="text-[#6B6B8A] font-mono">{used}/{users.length} · {pct(used,users.length)}% — Plus: {plusUsed}/{users.filter(u=>u.plan==='premium').length}</span>
+                    <span className="text-[#181A2B]">{f.charAt(0).toUpperCase()+f.slice(1)}</span>
+                    <span className="text-[#6B6A7A] font-mono">{used}/{users.length} · {pct(used,users.length)}% — Plus: {plusUsed}/{users.filter(u=>u.plan==='premium').length}</span>
                   </div>
                   <div className="h-2 bg-gray-100 rounded-full overflow-hidden flex">
-                    <div className="h-full bg-[#5B3FE8] rounded-l" style={{ width: `${pct(used-plusUsed, users.length)}%` }} />
+                    <div className="h-full bg-[#4B519E] rounded-l" style={{ width: `${pct(used-plusUsed, users.length)}%` }} />
                     <div className="h-full bg-emerald-500" style={{ width: `${pct(plusUsed, users.length)}%` }} />
                   </div>
                   <div className="flex gap-3 mt-0.5">
-                    <span className="text-[10px] text-[#5B3FE8]">■ Free: {used-plusUsed}</span>
+                    <span className="text-[10px] text-[#4B519E]">■ Free: {used-plusUsed}</span>
                     <span className="text-[10px] text-emerald-600">■ Plus: {plusUsed}</span>
                   </div>
                 </div>
@@ -812,14 +812,14 @@ function DeveloperView({ users }: { users: AdminUser[] }) {
               <div className="flex items-start justify-between gap-4 mb-2">
                 <div className="flex items-center gap-2">
                   <span className="text-sm">{w.prio}</span>
-                  <h4 className="text-[#1A1A2E] font-semibold text-sm">{w.title}</h4>
+                  <h4 className="text-[#181A2B] font-semibold text-sm">{w.title}</h4>
                 </div>
                 <div className="flex gap-2 flex-shrink-0">
                   <span className={`text-xs px-2 py-0.5 rounded-full font-mono ${w.effort==='Laag'?'bg-emerald-50 text-emerald-700':w.effort==='Midden'?'bg-amber-50 text-amber-700':'bg-red-50 text-red-600'}`}>Effort: {w.effort}</span>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-mono ${w.impact==='Hoog'?'bg-emerald-50 text-emerald-700':w.impact==='Midden'?'bg-blue-50 text-blue-700':'bg-gray-100 text-gray-500'}`}>Impact: {w.impact}</span>
                 </div>
               </div>
-              <p className="text-[#6B6B8A] text-sm leading-relaxed">{w.detail}</p>
+              <p className="text-[#6B6A7A] text-sm leading-relaxed">{w.detail}</p>
             </div>
           ))}
         </div>
@@ -838,7 +838,7 @@ function AVGView() {
         <p className="text-blue-700 text-sm leading-relaxed">Als eigenaar van Pactly ben je verwerkingsverantwoordelijke (art. 4 lid 7 AVG). Dit paneel toont alleen wat noodzakelijk is voor accountbeheer — dataminimalisatie conform art. 5.1.c.</p>
       </div>
       <div className="bg-white border border-gray-100 rounded-xl p-6 space-y-4">
-        <h3 className="text-[#1A1A2E] font-bold flex items-center gap-2"><span className="text-emerald-600">✓</span> Wat je als admin wél mag zien</h3>
+        <h3 className="text-[#181A2B] font-bold flex items-center gap-2"><span className="text-emerald-600">✓</span> Wat je als admin wél mag zien</h3>
         {[
           { data: 'E-mailadres', basis: 'Art. 6.1.b — Uitvoering overeenkomst', why: 'Nodig voor inloggen, accountherstel en communicatie.' },
           { data: 'Registratie- en inlogdatum', basis: 'Art. 6.1.b / 6.1.f', why: 'Accountbeheer en veiligheid.' },
@@ -849,13 +849,13 @@ function AVGView() {
           { data: 'Wachtlijst e-mails', basis: 'Art. 6.1.a — Toestemming', why: 'Gebruiker heeft expliciet aangemeld (opt-in + checkbox).' },
         ].map(row => (
           <div key={row.data} className="grid gap-4 text-sm border-b border-gray-100 pb-3 last:border-0 last:pb-0" style={{ gridTemplateColumns: '170px 1fr' }}>
-            <div><p className="text-[#1A1A2E] font-medium">{row.data}</p><p className="text-xs text-blue-600 font-mono mt-0.5">{row.basis}</p></div>
-            <p className="text-[#6B6B8A] leading-relaxed">{row.why}</p>
+            <div><p className="text-[#181A2B] font-medium">{row.data}</p><p className="text-xs text-blue-600 font-mono mt-0.5">{row.basis}</p></div>
+            <p className="text-[#6B6A7A] leading-relaxed">{row.why}</p>
           </div>
         ))}
       </div>
       <div className="bg-white border border-gray-100 rounded-xl p-6 space-y-3">
-        <h3 className="text-[#1A1A2E] font-bold flex items-center gap-2"><span className="text-red-500">✗</span> Wat je als admin NIET mag inzien</h3>
+        <h3 className="text-[#181A2B] font-bold flex items-center gap-2"><span className="text-red-500">✗</span> Wat je als admin NIET mag inzien</h3>
         {[
           { data: 'Contractinhoud',      why: 'Namen, bedragen, looptijden — niet noodzakelijk voor beheer.' },
           { data: 'Notities & bijlagen', why: 'Vrije tekst en documenten zijn strikt privé.' },
@@ -865,7 +865,7 @@ function AVGView() {
         ].map(row => (
           <div key={row.data} className="grid gap-4 text-sm border-b border-gray-100 pb-3 last:border-0 last:pb-0" style={{ gridTemplateColumns: '170px 1fr' }}>
             <p className="text-red-600 font-medium">{row.data}</p>
-            <p className="text-[#6B6B8A] leading-relaxed">{row.why}</p>
+            <p className="text-[#6B6A7A] leading-relaxed">{row.why}</p>
           </div>
         ))}
       </div>
@@ -895,28 +895,33 @@ function LoginScreen({ onAuth }: { onAuth: () => void }) {
     }, 400);
   };
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(135deg, #1A1A2E 0%, #2D1B69 60%, #1A0E40 100%)' }}>
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'linear-gradient(135deg, #181A2B 0%, #2D1B69 60%, #1A0E40 100%)' }}>
       <div className="bg-white rounded-2xl p-8 w-full max-w-sm space-y-6 shadow-2xl">
         {/* Logo */}
         <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm" style={{ background: 'linear-gradient(135deg, #5B3FE8 0%, #7B5FF0 100%)' }}>
-            <svg width="22" height="22" viewBox="0 0 18 18" fill="none">
-              <path d="M3 4h8l3 3v7H3V4z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-              <path d="M10 4v3h3" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-              <line x1="6" y1="9" x2="12" y2="9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-              <line x1="6" y1="12" x2="10" y2="12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </div>
+          <svg width="52" height="60" viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="admin-login-grad" x1="0" y1="0" x2="40" y2="46" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#9098C8" />
+                <stop offset="100%" stopColor="#4B519E" />
+              </linearGradient>
+            </defs>
+            <polygon points="20,2 37.3,11.5 37.3,34.5 20,44 2.7,34.5 2.7,11.5" fill="url(#admin-login-grad)" />
+            <path d="M 14 35 V 11 Q 27 11 27 18.5 Q 27 26 14 26" stroke="white" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          </svg>
           <div className="text-center">
-            <h1 className="text-[#1A1A2E] font-extrabold text-xl">Pactly Admin</h1>
-            <p className="text-[#6B6B8A] text-sm mt-0.5">Alleen voor bevoegde beheerders</p>
+            <h1 className="font-bold text-xl flex items-baseline justify-center gap-px">
+              <span style={{ color: '#181A2B', letterSpacing: '-0.02em' }}>Pactly</span>
+              <span style={{ color: '#FF6B7D' }}>.</span>
+            </h1>
+            <p className="text-[#6B6A7A] text-sm mt-0.5">Alleen voor bevoegde beheerders</p>
           </div>
         </div>
         <div className="space-y-3">
           <input type="password" value={pwd} onChange={e => { setPwd(e.target.value); setError(false); }} onKeyDown={e => e.key === 'Enter' && submit()} placeholder="Beheerderswachtwoord"
-            className={`w-full px-4 py-3 bg-gray-50 border rounded-xl text-[#1A1A2E] placeholder-gray-400 focus:outline-none transition-colors text-sm ${error ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-[#5B3FE8]'}`} />
+            className={`w-full px-4 py-3 bg-gray-50 border rounded-xl text-[#181A2B] placeholder-gray-400 focus:outline-none transition-colors text-sm ${error ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-[#4B519E]'}`} />
           {error && <p className="text-red-500 text-xs px-1">Onjuist wachtwoord — probeer opnieuw.</p>}
-          <button onClick={submit} disabled={loading || !pwd} className="w-full py-3 font-bold rounded-xl transition-all text-white disabled:opacity-50" style={{ background: 'linear-gradient(135deg, #5B3FE8 0%, #7B5FF0 100%)' }}>
+          <button onClick={submit} disabled={loading || !pwd} className="w-full py-3 font-bold rounded-xl transition-all text-white disabled:opacity-50" style={{ background: 'linear-gradient(135deg, #6B72B8 0%, #4B519E 100%)' }}>
             {loading ? 'Controleren…' : 'Inloggen'}
           </button>
         </div>
@@ -954,31 +959,36 @@ export function AdminApp() {
   ];
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: '#F8F7FF' }}>
+    <div className="min-h-screen flex" style={{ backgroundColor: '#FAFAFC' }}>
       {/* Sidebar */}
       <aside className="w-60 bg-white border-r border-gray-200 flex flex-col flex-shrink-0">
         {/* Logo */}
         <div className="px-5 py-5 border-b border-gray-100">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm" style={{ background: 'linear-gradient(135deg, #5B3FE8 0%, #7B5FF0 100%)' }}>
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M3 4h8l3 3v7H3V4z" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-                <path d="M10 4v3h3" stroke="white" strokeWidth="1.5" strokeLinejoin="round"/>
-                <line x1="6" y1="9" x2="12" y2="9" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-                <line x1="6" y1="12" x2="10" y2="12" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </div>
+            <svg width="32" height="37" viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+              <defs>
+                <linearGradient id="admin-sidebar-grad" x1="0" y1="0" x2="40" y2="46" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#9098C8" />
+                  <stop offset="100%" stopColor="#4B519E" />
+                </linearGradient>
+              </defs>
+              <polygon points="20,2 37.3,11.5 37.3,34.5 20,44 2.7,34.5 2.7,11.5" fill="url(#admin-sidebar-grad)" />
+              <path d="M 14 35 V 11 Q 27 11 27 18.5 Q 27 26 14 26" stroke="white" strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            </svg>
             <div>
-              <p className="text-[#1A1A2E] font-extrabold text-sm leading-tight">Pactly Admin</p>
-              <p className="text-[#6B6B8A] text-xs mt-0.5">Beheerpaneel v2.0</p>
+              <p className="font-bold text-sm leading-tight flex items-baseline gap-px">
+                <span style={{ color: '#181A2B', letterSpacing: '-0.02em' }}>Pactly</span>
+                <span style={{ color: '#FF6B7D' }}>.</span>
+              </p>
+              <p className="text-[#6B6A7A] text-xs mt-0.5">Beheerpaneel v2.0</p>
             </div>
           </div>
         </div>
 
         {/* Quick revenue */}
         <div className="px-4 py-3 border-b border-gray-100 space-y-1">
-          <p className="text-xs text-[#6B6B8A] font-mono">MRR · ARR</p>
-          <p className="text-emerald-600 font-bold text-base">{euros(mrr)} <span className="text-[#6B6B8A] text-xs font-normal">/ {euros(mrr*12)}</span></p>
+          <p className="text-xs text-[#6B6A7A] font-mono">MRR · ARR</p>
+          <p className="text-emerald-600 font-bold text-base">{euros(mrr)} <span className="text-[#6B6A7A] text-xs font-normal">/ {euros(mrr*12)}</span></p>
           <p className="text-xs text-gray-400">{premium.length} Plus-gebruikers · {users.length} totaal</p>
         </div>
 
@@ -987,17 +997,17 @@ export function AdminApp() {
             const active = view === item.view;
             return (
               <button key={item.view} onClick={() => setView(item.view)}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all text-left ${active ? 'text-[#5B3FE8]' : 'text-[#6B6B8A] hover:text-[#1A1A2E] hover:bg-gray-50'}`}
-                style={active ? { backgroundColor: 'rgba(91,63,232,0.08)' } : {}}>
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-semibold transition-all text-left ${active ? 'text-[#4B519E]' : 'text-[#6B6A7A] hover:text-[#181A2B] hover:bg-gray-50'}`}
+                style={active ? { backgroundColor: 'rgba(75,81,158,0.08)' } : {}}>
                 <span className="flex items-center gap-2.5">
                   <span>{item.icon}</span>
                   <span>{item.label}</span>
                 </span>
                 <div className="flex items-center gap-1.5">
                   {item.badge && (
-                    <span className={`text-xs font-mono px-1.5 py-0.5 rounded-full ${active ? 'bg-[#5B3FE8] text-white' : 'bg-gray-100 text-[#6B6B8A]'}`}>{item.badge}</span>
+                    <span className={`text-xs font-mono px-1.5 py-0.5 rounded-full ${active ? 'bg-[#4B519E] text-white' : 'bg-gray-100 text-[#6B6A7A]'}`}>{item.badge}</span>
                   )}
-                  <span className={`text-[9px] font-mono px-1 py-0.5 rounded ${active ? 'text-[#5B3FE8]/60' : 'text-gray-300'}`}>{item.role}</span>
+                  <span className={`text-[9px] font-mono px-1 py-0.5 rounded ${active ? 'text-[#4B519E]/60' : 'text-gray-300'}`}>{item.role}</span>
                 </div>
               </button>
             );
@@ -1005,8 +1015,8 @@ export function AdminApp() {
         </nav>
 
         <div className="p-3 border-t border-gray-100 space-y-1">
-          <a href="/app.html" className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[#6B6B8A] hover:text-[#1A1A2E] transition-colors rounded-xl hover:bg-gray-50">← Terug naar platform</a>
-          <button onClick={() => { sessionStorage.removeItem('pactly_admin'); setAuthed(false); }} className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[#6B6B8A] hover:text-red-500 transition-colors rounded-xl hover:bg-red-50 text-left">⊗ Uitloggen</button>
+          <a href="/app.html" className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[#6B6A7A] hover:text-[#181A2B] transition-colors rounded-xl hover:bg-gray-50">← Terug naar platform</a>
+          <button onClick={() => { sessionStorage.removeItem('pactly_admin'); setAuthed(false); }} className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[#6B6A7A] hover:text-red-500 transition-colors rounded-xl hover:bg-red-50 text-left">⊗ Uitloggen</button>
         </div>
       </aside>
 
@@ -1015,11 +1025,11 @@ export function AdminApp() {
         <div className="max-w-5xl mx-auto">
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-extrabold text-[#1A1A2E] flex items-center gap-2">
+              <h1 className="text-2xl font-extrabold text-[#181A2B] flex items-center gap-2">
                 <span>{nav.find(n => n.view === view)?.icon}</span>
                 <span>{nav.find(n => n.view === view)?.label}</span>
               </h1>
-              <p className="text-xs text-[#6B6B8A] mt-0.5 font-mono">Perspectief: {nav.find(n => n.view === view)?.role}</p>
+              <p className="text-xs text-[#6B6A7A] mt-0.5 font-mono">Perspectief: {nav.find(n => n.view === view)?.role}</p>
             </div>
             <p className="text-xs text-gray-400 font-mono">{TODAY.toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
           </div>

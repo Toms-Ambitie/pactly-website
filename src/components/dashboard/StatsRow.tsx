@@ -18,7 +18,7 @@ export function StatsRow({ contracts }: StatsRowProps) {
         icon={<FileText size={15} className="text-violet" />}
         value={String(active)}
         label="Actief"
-        bg="rgba(91,63,232,0.08)"
+        bg="rgba(75,81,158,0.08)"
       />
       <StatCard
         icon={<AlertTriangle size={15} className={urgent > 0 ? 'text-coral' : 'text-gray-400'} />}
@@ -32,7 +32,7 @@ export function StatsRow({ contracts }: StatsRowProps) {
         value={formatEuro(monthly)}
         label="/mnd"
         small
-        bg="rgba(91,63,232,0.08)"
+        bg="rgba(75,81,158,0.08)"
       />
     </div>
   );
@@ -51,7 +51,7 @@ function StatCard({ icon, value, label, accent, small, bg }: StatCardProps) {
   return (
     <div
       className="rounded-2xl px-3 py-3 border border-white/60"
-      style={{ background: bg || 'rgba(91,63,232,0.08)' }}
+      style={{ background: bg || 'rgba(75,81,158,0.08)' }}
     >
       <div className="flex items-center gap-1.5 mb-1.5">{icon}</div>
       <div className={`font-extrabold leading-none ${small ? 'text-sm' : 'text-2xl'} ${accent ? 'text-coral' : 'text-dark'}`}>

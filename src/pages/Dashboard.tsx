@@ -56,16 +56,16 @@ export function Dashboard({ contracts, members, userName, unreadCount, onNavigat
       {/* ── Hero banner — dark violet gradient ─────────────────── */}
       <div
         className="px-4 sm:px-8 pt-6 sm:pt-8 pb-7 sm:pb-8 relative overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #1A1A2E 0%, #2D1B69 60%, #1A0E40 100%)' }}
+        style={{ background: 'linear-gradient(135deg, #181A2B 0%, #2D1B69 60%, #1A0E40 100%)' }}
       >
         {/* Radial glows */}
         <div
           className="absolute top-0 right-1/4 w-72 h-72 rounded-full opacity-20 -translate-y-1/2 pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #5B3FE8, transparent)' }}
+          style={{ background: 'radial-gradient(circle, #4B519E, transparent)' }}
         />
         <div
           className="absolute bottom-0 left-0 w-52 h-52 rounded-full opacity-15 translate-y-1/2 pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #E8357A, transparent)' }}
+          style={{ background: 'radial-gradient(circle, #FF6B7D, transparent)' }}
         />
 
         <div className="relative z-10 flex items-center justify-between gap-4">
@@ -131,8 +131,8 @@ export function Dashboard({ contracts, members, userName, unreadCount, onNavigat
             className="bg-white rounded-2xl border border-gray-100 p-3 sm:p-4 text-left hover:shadow-md hover:-translate-y-0.5 transition-all"
           >
             <div className="flex items-start justify-between mb-2 sm:mb-3">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center text-base sm:text-lg flex-shrink-0" style={{ background: 'rgba(91,63,232,0.09)' }}>📋</div>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(91,63,232,0.09)' }}>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center text-base sm:text-lg flex-shrink-0" style={{ background: 'rgba(75,81,158,0.09)' }}>📋</div>
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(75,81,158,0.09)' }}>
                 <div className="w-2 h-2 rounded-full bg-violet" />
               </div>
             </div>
@@ -149,10 +149,10 @@ export function Dashboard({ contracts, members, userName, unreadCount, onNavigat
             <div className="flex items-start justify-between mb-2 sm:mb-3">
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center text-base sm:text-lg flex-shrink-0" style={{ background: urgentCount > 0 ? 'rgba(232,53,122,0.09)' : 'rgba(0,0,0,0.04)' }}>⚠️</div>
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: urgentCount > 0 ? 'rgba(232,53,122,0.09)' : 'rgba(0,0,0,0.04)' }}>
-                <div className="w-2 h-2 rounded-full" style={{ background: urgentCount > 0 ? '#E8357A' : '#d1d5db' }} />
+                <div className="w-2 h-2 rounded-full" style={{ background: urgentCount > 0 ? '#FF6B7D' : '#d1d5db' }} />
               </div>
             </div>
-            <div className="text-xl sm:text-2xl font-extrabold leading-none" style={{ color: urgentCount > 0 ? '#E8357A' : '#9ca3af' }}>{urgentCount}</div>
+            <div className="text-xl sm:text-2xl font-extrabold leading-none" style={{ color: urgentCount > 0 ? '#FF6B7D' : '#9ca3af' }}>{urgentCount}</div>
             <div className="text-[11px] sm:text-xs font-semibold text-dark mt-1 leading-tight">Vereisen aandacht</div>
             <div className="text-[10px] sm:text-xs text-mid font-mono mt-0.5 leading-tight">Binnen 90 dagen</div>
           </button>
@@ -165,10 +165,10 @@ export function Dashboard({ contracts, members, userName, unreadCount, onNavigat
             <div className="flex items-start justify-between mb-2 sm:mb-3">
               <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center text-base sm:text-lg flex-shrink-0" style={{ background: unreadCount > 0 ? 'rgba(232,53,122,0.09)' : 'rgba(0,0,0,0.04)' }}>🔔</div>
               <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: unreadCount > 0 ? 'rgba(232,53,122,0.09)' : 'rgba(0,0,0,0.04)' }}>
-                <div className="w-2 h-2 rounded-full" style={{ background: unreadCount > 0 ? '#E8357A' : '#d1d5db' }} />
+                <div className="w-2 h-2 rounded-full" style={{ background: unreadCount > 0 ? '#FF6B7D' : '#d1d5db' }} />
               </div>
             </div>
-            <div className="text-xl sm:text-2xl font-extrabold leading-none" style={{ color: unreadCount > 0 ? '#E8357A' : '#9ca3af' }}>{unreadCount}</div>
+            <div className="text-xl sm:text-2xl font-extrabold leading-none" style={{ color: unreadCount > 0 ? '#FF6B7D' : '#9ca3af' }}>{unreadCount}</div>
             <div className="text-[11px] sm:text-xs font-semibold text-dark mt-1 leading-tight">Ongelezen meldingen</div>
             <div className="text-[10px] sm:text-xs text-mid font-mono mt-0.5 leading-tight">Bekijk meldingen</div>
           </button>
@@ -198,7 +198,7 @@ export function Dashboard({ contracts, members, userName, unreadCount, onNavigat
                 const meta = CATEGORY_META[c.category];
                 const isUrgent = c.status === 'urgent';
                 const badgeBg  = days !== null && days < 30 ? '#fdf2f8' : days !== null && days < 90 ? '#fffbeb' : '#eff6ff';
-                const badgeColor = days !== null && days < 30 ? '#E8357A' : days !== null && days < 90 ? '#d97706' : '#3b82f6';
+                const badgeColor = days !== null && days < 30 ? '#FF6B7D' : days !== null && days < 90 ? '#d97706' : '#3b82f6';
                 return (
                   <button
                     key={c.id}

@@ -16,9 +16,9 @@ interface MeldingenProps {
 }
 
 const TYPE_META = {
-  urgent:  { icon: <Zap size={14} />,           color: '#E8357A', bg: '#fdf2f8', label: 'Urgent'      },
+  urgent:  { icon: <Zap size={14} />,           color: '#FF6B7D', bg: '#fdf2f8', label: 'Urgent'      },
   warning: { icon: <AlertTriangle size={14} />, color: '#FF7A35', bg: '#fff7f2', label: 'Waarschuwing' },
-  info:    { icon: <Info size={14} />,          color: '#5B3FE8', bg: '#f3f0ff', label: 'Info'         },
+  info:    { icon: <Info size={14} />,          color: '#4B519E', bg: '#f3f0ff', label: 'Info'         },
 };
 
 export function Meldingen({ notifications, contracts, onMarkRead, onMarkAllRead, onGoToContract }: MeldingenProps) {
@@ -45,16 +45,16 @@ export function Meldingen({ notifications, contracts, onMarkRead, onMarkAllRead,
 
   const timelineDotColor = (endDate: string | null) => {
     const d = daysUntilEnd(endDate);
-    if (d === null) return '#5B3FE8';
-    if (d < 30)  return '#E8357A';
+    if (d === null) return '#4B519E';
+    if (d < 30)  return '#FF6B7D';
     if (d < 90)  return '#FF7A35';
-    return '#5B3FE8';
+    return '#4B519E';
   };
 
   const timelineBadge = (endDate: string | null) => {
     const d = daysUntilEnd(endDate);
     if (d === null) return { bg: '#eff6ff', color: '#3b82f6', label: '–' };
-    if (d < 30)  return { bg: '#fdf2f8', color: '#E8357A', label: `Over ${d}d` };
+    if (d < 30)  return { bg: '#fdf2f8', color: '#FF6B7D', label: `Over ${d}d` };
     if (d < 90)  return { bg: '#fffbeb', color: '#d97706', label: `Over ${d}d` };
     return { bg: '#eff6ff', color: '#3b82f6', label: `Over ${d}d` };
   };
@@ -64,11 +64,11 @@ export function Meldingen({ notifications, contracts, onMarkRead, onMarkAllRead,
       {/* Header */}
       <div
         className="px-4 sm:px-5 pt-6 sm:pt-8 pb-5 sm:pb-6 relative overflow-hidden border-b border-gray-100"
-        style={{ background: 'linear-gradient(160deg, #FFF0F6 0%, #FDF9FF 100%)' }}
+        style={{ background: 'linear-gradient(160deg, #FFE3E7 0%, #FDF9FF 100%)' }}
       >
         <div
           className="absolute top-0 right-0 w-48 h-48 rounded-full opacity-25 -translate-y-1/4 translate-x-1/4"
-          style={{ background: 'radial-gradient(circle, #E8357A, transparent)' }}
+          style={{ background: 'radial-gradient(circle, #FF6B7D, transparent)' }}
         />
         <div className="relative z-10 flex items-start justify-between">
           <div>

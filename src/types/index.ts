@@ -71,17 +71,17 @@ export interface CategoryMeta {
 
 export const CATEGORY_META: Record<ContractCategory, CategoryMeta> = {
   energie:         { label: 'Energie',         icon: '⚡', color: '#F59E0B' },
-  hypotheek:       { label: 'Hypotheek',       icon: '🏠', color: '#5B3FE8' },
+  hypotheek:       { label: 'Hypotheek',       icon: '🏠', color: '#4B519E' },
   huur:            { label: 'Huur',            icon: '🏡', color: '#7C3AED' },
   telefoon:        { label: 'Telefoon',        icon: '📱', color: '#0EA5E9' },
   verzekering:     { label: 'Verzekering',     icon: '🛡️', color: '#10B981' },
   streaming:       { label: 'Streaming',       icon: '🎬', color: '#EF4444' },
   internet:        { label: 'Internet',        icon: '📡', color: '#6366F1' },
-  zorgverzekering: { label: 'Zorgverzekering', icon: '❤️', color: '#E8357A' },
+  zorgverzekering: { label: 'Zorgverzekering', icon: '❤️', color: '#FF6B7D' },
   sport:           { label: 'Sport',           icon: '💪', color: '#FF7A35' },
   software:        { label: 'Software',        icon: '🎨', color: '#DC2626' },
   media:           { label: 'Media',           icon: '📰', color: '#64748B' },
-  overig:          { label: 'Overig',          icon: '📄', color: '#6B6B8A' },
+  overig:          { label: 'Overig',          icon: '📄', color: '#6B6A7A' },
 };
 
 // ─── Status metadata ────────────────────────────────────────────────────────
@@ -94,26 +94,26 @@ export interface StatusMeta {
 }
 
 export const STATUS_META: Record<ContractStatus, StatusMeta> = {
-  actief:   { label: 'Actief',   color: '#1A1A2E', bg: '#F7FF5C', barColor: '#F7FF5C' },
+  actief:   { label: 'Actief',   color: '#181A2B', bg: '#F7FF5C', barColor: '#F7FF5C' },
   evalueer: { label: 'Evalueer', color: '#FFFFFF', bg: '#FF7A35', barColor: '#FF7A35' },
-  urgent:   { label: 'Urgent',   color: '#FFFFFF', bg: '#E8357A', barColor: '#E8357A' },
-  verlopen: { label: 'Verlopen', color: '#FFFFFF', bg: '#6B6B8A', barColor: '#6B6B8A' },
+  urgent:   { label: 'Urgent',   color: '#FFFFFF', bg: '#FF6B7D', barColor: '#FF6B7D' },
+  verlopen: { label: 'Verlopen', color: '#FFFFFF', bg: '#6B6A7A', barColor: '#6B6A7A' },
 };
 
 // ─── Contract tags ──────────────────────────────────────────────────────────
 
 export const CONTRACT_TAGS = [
   { id: 'verhuizing', label: 'Verhuizing',  icon: '🚚', color: '#7C3AED' },
-  { id: 'opzeggen',   label: 'Opzeggen',    icon: '✂️',  color: '#E8357A' },
+  { id: 'opzeggen',   label: 'Opzeggen',    icon: '✂️',  color: '#FF6B7D' },
   { id: 'besparen',   label: 'Besparen',    icon: '💡', color: '#10B981' },
   { id: 'evalueren',  label: 'Evalueren',   icon: '🔍', color: '#FF7A35' },
-  { id: 'verlengen',  label: 'Verlengen',   icon: '🔄', color: '#5B3FE8' },
+  { id: 'verlengen',  label: 'Verlengen',   icon: '🔄', color: '#4B519E' },
 ] as const;
 
 // ─── Default household members ──────────────────────────────────────────────
 
 export const DEFAULT_MEMBERS: HouseholdMember[] = [
-  { id: 'tom',   name: 'Tom',         color: '#5B3FE8', initials: 'TM' },
-  { id: 'ilze',  name: 'Ilze',        color: '#E8357A', initials: 'IL' },
+  { id: 'tom',   name: 'Tom',         color: '#4B519E', initials: 'TM' },
+  { id: 'ilze',  name: 'Ilze',        color: '#FF6B7D', initials: 'IL' },
   { id: 'samen', name: 'Gezamenlijk', color: '#10B981', initials: 'GZ' },
 ];

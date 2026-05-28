@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "pactly-app",
-      "runtimeExecutable": "bash",
-      "runtimeArgs": ["/Users/tommulder/Documents/Claude Code/pactly/start-dev.sh"],
+      "name": "pactly",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
       "port": 5174
     }
   ]

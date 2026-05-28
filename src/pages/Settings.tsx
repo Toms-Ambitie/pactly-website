@@ -6,7 +6,7 @@ import { Button } from '../components/ui/Button';
 import { ConfirmDialog } from '../components/ui/ConfirmDialog';
 import { clearAllData } from '../utils/storage';
 
-const MEMBER_COLORS = ['#5B3FE8', '#E8357A', '#FF7A35', '#10B981', '#0EA5E9', '#F59E0B', '#7C3AED'];
+const MEMBER_COLORS = ['#4B519E', '#FF6B7D', '#FF7A35', '#10B981', '#0EA5E9', '#F59E0B', '#7C3AED'];
 
 interface SettingsProps {
   settings: AppSettings;
